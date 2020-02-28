@@ -1,11 +1,6 @@
-[webserver_all:children]
-webserver_production
-webserver_test
-
 [webserver:children]
 webserver_production
 webserver_test
-develop
 
 [webserver_production]
 doorstroming.jurysysteem.nl

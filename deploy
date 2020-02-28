@@ -53,7 +53,7 @@ askTag
 printf -v limit "webserver_%s" "$environment"
 
 if [ "$environment" = "all" ]; then
-    limit="webserver_all"
+    limit="webserver"
 fi
 
 echo -e "Limit: $limit"
