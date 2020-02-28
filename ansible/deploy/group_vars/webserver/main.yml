@@ -1,0 +1,66 @@
+---
+
+github_repo: git@github.com:mjmeijerman/dg-doorstroming.git
+deploy_user: deploy
+nginx_user: www-data
+
+# APP
+
+application_root: ~
+application_env: prod
+php_socket: "{{ php7_fpm_pool_listen }}"
+
+web_writable_folders:
+  - { name: "{{ deploy_helper.new_release_path }}/var/cache", recursive: false }
+  - { name: "{{ deploy_helper.new_release_path }}/var/log", recursive: false }
+  - { name: "{{ deploy_helper.shared_path }}/sessions", recursive: false }
+
+project_root: "{{ application_root }}"
+project_git_repo: "{{ github_repo }}"
+project_deploy_strategy: git
+
+project_environment:
+  SYMFONY_ENV: "prod"
+
+project_templates:
+  - name: parameters.yml
+    src: "{{ playbook_dir }}/templates/.env.j2"
+    dest: ".env"
+
+project_deploy_hook_on_finalize: "{{ playbook_dir }}/hooks/perform-build.yml"
+
+project_unwanted_items:
+  - .git
+  - .phpspec
+  - ansible
+  - config/packages/dev
+  - config/packages/test
+  - config/routes/dev
+  - config/routes/test
+  - docker
+  - docs
+  - spec
+  - tests
+  - .env.dist
+  - .gitignore
+  - .travis.yml
+  - composer.outdated
+  - docker-compose.yml
+  - docker-compose-test.yml
+  - phpcs.xml
+  - phpspec.yml.dist
+  - phpstan.neon
+  - phpunit.xml.dist
+  - Vagrantfile
+
+project_shared_children:
+  - path: "/var/sessions"
+    src: "sessions"
+
+project_has_composer: yes
+project_copy_previous_composer_vendors: yes
+project_has_npm: no
+project_copy_previous_npm_modules: no
+
+project_clean: true
+project_keep_releases: 3
