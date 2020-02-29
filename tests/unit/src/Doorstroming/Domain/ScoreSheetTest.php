@@ -61,8 +61,10 @@ class ScoreSheetTest extends TestCase
         $scoreSheet = ScoreSheet::create(
             'Medaillegroep A',
             1,
-            Category::JEUGD1(),
-            Level::N3(),
+            CategoryLevelCombination::create(
+                Category::JEUGD1(),
+                Level::N3()
+            ),
             [$gymnast1, $gymnast2, $gymnast3, $gymnast4, $gymnast5]
         );
 

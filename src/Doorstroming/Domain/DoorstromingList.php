@@ -10,9 +10,7 @@ final class DoorstromingList
 {
     private string $identifier;
 
-    private Category $category;
-
-    private Level $level;
+    private CategoryLevelCombination $categoryLevelCombination;
 
     /**
      * @var DoorstromingEntry[]
@@ -23,8 +21,7 @@ final class DoorstromingList
 
     public static function create(
         string $identifier,
-        Category $category,
-        Level $level,
+        CategoryLevelCombination $categoryLevelCombination,
         array $doorstromingEntries,
         int $totalNumberOfFullParticipatingGymnasts
     ): self
@@ -33,8 +30,7 @@ final class DoorstromingList
 
         $self                                         = new self();
         $self->identifier                             = $identifier;
-        $self->category                               = $category;
-        $self->level                                  = $level;
+        $self->categoryLevelCombination               = $categoryLevelCombination;
         $self->doorstromingEntries                    = $doorstromingEntries;
         $self->totalNumberOfFullParticipatingGymnasts = $totalNumberOfFullParticipatingGymnasts;
 
@@ -87,14 +83,9 @@ final class DoorstromingList
         return $this->identifier;
     }
 
-    public function category(): Category
+    public function categoryLevelCombination(): CategoryLevelCombination
     {
-        return $this->category;
-    }
-
-    public function level(): Level
-    {
-        return $this->level;
+        return $this->categoryLevelCombination;
     }
 
     public function doorstromingEntries(): array

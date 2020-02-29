@@ -28,7 +28,7 @@ final class ScoreSheets
         $categoryLevelCombinations = CategoryLevelCombinations::create([]);
         foreach ($this->scoreSheets as $scoreSheet) {
             $categoryLevelCombinations->push(
-                CategoryLevelCombination::create($scoreSheet->category(), $scoreSheet->level())
+                $scoreSheet->categoryLevelCombination()
             );
         }
 

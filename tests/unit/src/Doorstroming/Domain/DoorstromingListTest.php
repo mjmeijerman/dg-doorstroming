@@ -125,8 +125,10 @@ class DoorstromingListTest extends TestCase
 
         $doorstromingList = DoorstromingList::create(
             'Instap N3 groep A',
-            Category::INSTAP(),
-            Level::N3(),
+            CategoryLevelCombination::create(
+                Category::INSTAP(),
+                Level::N3()
+            ),
             [$entry5, $entry1, $entry3, $entry9, $entry7, $entry10, $entry2, $entry8, $entry4, $entry6],
             8
         );

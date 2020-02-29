@@ -12,9 +12,7 @@ final class ScoreSheet
 
     private int $scoreSheetNumber;
 
-    private Category $category;
-
-    private Level $level;
+    private CategoryLevelCombination $categoryLevelCombination;
 
     /**
      * @var Gymnast[]
@@ -24,19 +22,17 @@ final class ScoreSheet
     public static function create(
         string $identifier,
         int $scoreSheetNumber,
-        Category $category,
-        Level $level,
+        CategoryLevelCombination $categoryLevelCombination,
         array $gymnasts
     ): self
     {
         Assertion::allIsInstanceOf($gymnasts, Gymnast::class);
 
-        $self                   = new self();
-        $self->identifier       = $identifier;
-        $self->scoreSheetNumber = $scoreSheetNumber;
-        $self->category         = $category;
-        $self->level            = $level;
-        $self->gymnasts         = $gymnasts;
+        $self                           = new self();
+        $self->identifier               = $identifier;
+        $self->scoreSheetNumber         = $scoreSheetNumber;
+        $self->categoryLevelCombination = $categoryLevelCombination;
+        $self->gymnasts                 = $gymnasts;
 
         $self->addRanking();
 
@@ -117,14 +113,9 @@ final class ScoreSheet
         return $this->scoreSheetNumber;
     }
 
-    public function category(): Category
+    public function categoryLevelCombination(): CategoryLevelCombination
     {
-        return $this->category;
-    }
-
-    public function level(): Level
-    {
-        return $this->level;
+        return $this->categoryLevelCombination;
     }
 
     /**
