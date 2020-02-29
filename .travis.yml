@@ -1,0 +1,33 @@
+language: php
+php:
+  - '7.4'
+
+dist: trusty
+
+env:
+  - TEST_SUITE=unit
+
+branches:
+  only:
+    - master
+
+cache:
+  directories:
+    - vendor
+
+install:
+  - composer install --no-scripts --ignore-platform-reqs
+  - vendor/bin/codecept build
+
+before_script:
+  - echo 'date.timezone = "Europe/Amsterdam"' >> ~/.phpenv/versions/$(phpenv version-name)/etc/conf.d/travis.ini
+  - phpenv config-rm xdebug.ini
+
+script: "bin/run_tests_$TEST_SUITE"
+
+after_script:
+  - killall php
+
+notifications:
+  email:
+    on_success: change
