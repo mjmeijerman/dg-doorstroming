@@ -15,28 +15,79 @@ final class CategoryLevelSpecificDoorstromingLists
      */
     private array $doorstromingLists;
 
-    public static function create(CategoryLevelCombination $categoryLevelCombination, array $doorstromingLists): self
+    private int $numberOfExtraSpotsAvailable;
+
+    public static function create(CategoryLevelCombination $categoryLevelCombination, array $doorstromingLists, int $numberOfExtraSpotsAvailable): self
     {
         Assertion::allIsInstanceOf($doorstromingLists, DoorstromingList::class);
 
-        $self                           = new self();
-        $self->categoryLevelCombination = $categoryLevelCombination;
-        $self->doorstromingLists        = $doorstromingLists;
+        $self                              = new self();
+        $self->categoryLevelCombination    = $categoryLevelCombination;
+        $self->doorstromingLists           = $doorstromingLists;
+        $self->numberOfExtraSpotsAvailable = $numberOfExtraSpotsAvailable;
         $self->protect();
+        $self->divideExtraSpotsAvailable();
 
         return $self;
     }
 
-    public function getCategoryLevelCombinations(): CategoryLevelCombinations
+    private function divideExtraSpotsAvailable(): void
     {
-        $categoryLevelCombinations = CategoryLevelCombinations::create([]);
+        $this->sortByTotalNumberOfFullParticipatingGymnasts();
+        if ($this->numberOfExtraSpotsAvailable === 0) {
+            return;
+        }
         foreach ($this->doorstromingLists as $doorstromingList) {
-            $categoryLevelCombinations->push(
-                $doorstromingList->categoryLevelCombination()
+            if ($this->numberOfExtraSpotsAvailable === 0) {
+                return;
+            }
+
+            $this->subtractFromNumberOfExtraSpotsAvailable(1);
+            $doorstromingList->addExtraSpotAvailable(1);
+        }
+    }
+
+    private function sortByTotalNumberOfFullParticipatingGymnasts(): void
+    {
+        usort(
+            $this->doorstromingLists,
+            function (DoorstromingList $firstList, DoorstromingList $otherList) {
+                if ($firstList->totalNumberOfFullParticipatingGymnasts()
+                    === $otherList->totalNumberOfFullParticipatingGymnasts()) {
+                    return 0;
+                }
+
+                return (
+                    $firstList->totalNumberOfFullParticipatingGymnasts()
+                    > $otherList->totalNumberOfFullParticipatingGymnasts()
+                ) ? -1 : 1;
+            }
+        );
+    }
+
+    private function subtractFromNumberOfExtraSpotsAvailable(int $number): void
+    {
+        if ($number > $this->numberOfExtraSpotsAvailable) {
+            throw new \LogicException(
+                sprintf(
+                    'Trying to subtract "%d" spots, but only "%d" extra spots are available"',
+                    $number,
+                    $this->numberOfExtraSpotsAvailable
+                )
             );
         }
 
-        return $categoryLevelCombinations;
+        $this->numberOfExtraSpotsAvailable = $this->numberOfExtraSpotsAvailable - $number;
+    }
+
+    public function categoryLevelCombination(): CategoryLevelCombination
+    {
+        return $this->categoryLevelCombination;
+    }
+
+    public function doorstromingLists(): array
+    {
+        return $this->doorstromingLists;
     }
 
     private function protect(): void

@@ -210,6 +210,28 @@ final class Level
     }
 
     /**
+     * @return string[]
+     */
+    public static function nationalLevels(): array
+    {
+        return [
+            self::N1,
+            self::N2,
+            self::N3,
+            self::N4,
+            self::ERE,
+            self::DIV1,
+            self::DIV2,
+            self::DIV3,
+        ];
+    }
+
+    public function isNationalLevel(): bool
+    {
+        return in_array($this->toString(), self::nationalLevels());
+    }
+
+    /**
      * @param Category $category
      *
      * @return string[]

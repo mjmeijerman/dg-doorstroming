@@ -19,11 +19,14 @@ final class DoorstromingList
 
     private int $totalNumberOfFullParticipatingGymnasts;
 
+    private int $numberOfSpotsAvailable;
+
     public static function create(
         string $identifier,
         CategoryLevelCombination $categoryLevelCombination,
         array $doorstromingEntries,
-        int $totalNumberOfFullParticipatingGymnasts
+        int $totalNumberOfFullParticipatingGymnasts,
+        int $numberOfSpotsAvailable
     ): self
     {
         Assertion::allIsInstanceOf($doorstromingEntries, DoorstromingEntry::class);
@@ -33,6 +36,7 @@ final class DoorstromingList
         $self->categoryLevelCombination               = $categoryLevelCombination;
         $self->doorstromingEntries                    = $doorstromingEntries;
         $self->totalNumberOfFullParticipatingGymnasts = $totalNumberOfFullParticipatingGymnasts;
+        $self->numberOfSpotsAvailable                 = $numberOfSpotsAvailable;
 
         $self->addRanking();
 
@@ -47,6 +51,11 @@ final class DoorstromingList
                 return $firstEntry->compare($otherEntry);
             }
         );
+    }
+
+    public function addExtraSpotAvailable(int $number): void
+    {
+        $this->numberOfSpotsAvailable = $this->numberOfSpotsAvailable + $number;
     }
 
     private function addRanking(): void
@@ -96,6 +105,11 @@ final class DoorstromingList
     public function totalNumberOfFullParticipatingGymnasts(): int
     {
         return $this->totalNumberOfFullParticipatingGymnasts;
+    }
+
+    public function numberOfSpotsAvailabe(): int
+    {
+        return $this->numberOfSpotsAvailabe;
     }
 
     private function __construct()
