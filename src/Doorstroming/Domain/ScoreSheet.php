@@ -95,6 +95,18 @@ final class ScoreSheet
         }
     }
 
+    public function totalNumberOfFullParticipatedGymnasts(): int
+    {
+        $total = 0;
+        foreach ($this->gymnasts as $gymnast) {
+            if ($gymnast->participatedEntireCompetition()) {
+                $total++;
+            }
+        }
+
+        return $total;
+    }
+
     public function identifier(): string
     {
         return $this->identifier;

@@ -20,7 +20,8 @@ class GymnastTest extends TestCase
             'Name 1',
             'Club 1',
             43.104,
-            12.30
+            12.30,
+            true
         );
 
         $gymnast2 = Gymnast::create(
@@ -28,7 +29,8 @@ class GymnastTest extends TestCase
             'Name 2',
             'Club 2',
             43.104,
-            12.30
+            12.30,
+            true
         );
 
         $this->assertSame(0, $gymnast1->compare($gymnast2));
@@ -44,7 +46,8 @@ class GymnastTest extends TestCase
             'Name 1',
             'Club 1',
             43.4,
-            12.30
+            12.30,
+            true
         );
 
         $gymnast2 = Gymnast::create(
@@ -52,7 +55,8 @@ class GymnastTest extends TestCase
             'Name 2',
             'Club 2',
             43.104,
-            12.30
+            12.30,
+            true
         );
 
         $this->assertSame(-1, $gymnast1->compare($gymnast2));

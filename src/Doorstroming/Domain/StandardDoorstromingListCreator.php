@@ -44,7 +44,9 @@ final class StandardDoorstromingListCreator implements DoorstromingListCreator
             $firstCompetitionScoreSheet->identifier(),
             $firstCompetitionScoreSheet->category(),
             $firstCompetitionScoreSheet->level(),
-            $doorstromingEntries
+            $doorstromingEntries,
+            $firstCompetitionScoreSheet->totalNumberOfFullParticipatedGymnasts()
+            + $secondCompetitionScoreSheet->totalNumberOfFullParticipatedGymnasts()
         );
     }
 }

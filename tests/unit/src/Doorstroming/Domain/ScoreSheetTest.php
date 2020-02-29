@@ -18,7 +18,8 @@ class ScoreSheetTest extends TestCase
             'Name 1',
             'Club 1',
             43.104,
-            12.30
+            12.30,
+            true
         );
 
         $gymnast2 = Gymnast::create(
@@ -26,7 +27,8 @@ class ScoreSheetTest extends TestCase
             'Name 1',
             'Club 1',
             43.103,
-            12.30
+            12.30,
+            false
         );
 
         $gymnast3 = Gymnast::create(
@@ -34,7 +36,8 @@ class ScoreSheetTest extends TestCase
             'Name 1',
             'Club 1',
             43.105,
-            12.30
+            12.30,
+            true
         );
 
         $gymnast4 = Gymnast::create(
@@ -42,7 +45,8 @@ class ScoreSheetTest extends TestCase
             'Name 1',
             'Club 1',
             43.104,
-            12.30
+            12.30,
+            true
         );
 
         $gymnast5 = Gymnast::create(
@@ -50,7 +54,8 @@ class ScoreSheetTest extends TestCase
             'Name 1',
             'Club 1',
             43.9,
-            12.30
+            12.30,
+            true
         );
 
         $scoreSheet = ScoreSheet::create(
@@ -68,5 +73,6 @@ class ScoreSheetTest extends TestCase
         $this->assertSame(3, $gymnast1->rank());
         $this->assertSame(3, $gymnast4->rank());
         $this->assertSame(5, $gymnast2->rank());
+        $this->assertSame(4, $scoreSheet->totalNumberOfFullParticipatedGymnasts());
     }
 }

@@ -134,6 +134,27 @@ final class Level
         return $this->level;
     }
 
+    public function compare(Level $other): int
+    {
+        if ($this->equals($other)) {
+            return 0;
+        }
+
+        foreach (self::allFromHighToLow() as $level) {
+            if ($this->equals($level)) {
+                return -1;
+            }
+
+            if ($other->equals($level)) {
+                return 1;
+            }
+        }
+
+        throw new \LogicException(
+            sprintf('Found no result while comparing category "%s" with "%s"', $this->toString(), $other->toString())
+        );
+    }
+
     /**
      * @return self[]
      */
@@ -191,11 +212,13 @@ final class Level
     /**
      * @param Category $category
      *
-     * @return self[]
+     * @return string[]
      */
     public static function getAvailableLevelsForCategoryAsString(Category $category): array
     {
         switch ($category->toString()) {
+            case Category::MINI:
+            case Category::VOORINSTAP:
             case Category::INSTAP:
             case Category::PUPIL1:
             case Category::PUPIL2:

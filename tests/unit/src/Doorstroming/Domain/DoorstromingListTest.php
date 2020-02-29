@@ -127,7 +127,8 @@ class DoorstromingListTest extends TestCase
             'Instap N3 groep A',
             Category::INSTAP(),
             Level::N3(),
-            [$entry5, $entry1, $entry3, $entry9, $entry7, $entry10, $entry2, $entry8, $entry4, $entry6]
+            [$entry5, $entry1, $entry3, $entry9, $entry7, $entry10, $entry2, $entry8, $entry4, $entry6],
+            8
         );
 
         $expectedList = [$entry1, $entry2, $entry3, $entry4, $entry5, $entry6, $entry7, $entry9, $entry8, $entry10];

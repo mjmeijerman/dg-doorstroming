@@ -19,20 +19,24 @@ final class DoorstromingList
      */
     private array $doorstromingEntries;
 
+    private int $totalNumberOfFullParticipatingGymnasts;
+
     public static function create(
         string $identifier,
         Category $category,
         Level $level,
-        array $doorstromingEntries
+        array $doorstromingEntries,
+        int $totalNumberOfFullParticipatingGymnasts
     ): self
     {
         Assertion::allIsInstanceOf($doorstromingEntries, DoorstromingEntry::class);
 
-        $self                      = new self();
-        $self->identifier          = $identifier;
-        $self->category            = $category;
-        $self->level               = $level;
-        $self->doorstromingEntries = $doorstromingEntries;
+        $self                                         = new self();
+        $self->identifier                             = $identifier;
+        $self->category                               = $category;
+        $self->level                                  = $level;
+        $self->doorstromingEntries                    = $doorstromingEntries;
+        $self->totalNumberOfFullParticipatingGymnasts = $totalNumberOfFullParticipatingGymnasts;
 
         $self->addRanking();
 
@@ -96,6 +100,11 @@ final class DoorstromingList
     public function doorstromingEntries(): array
     {
         return $this->doorstromingEntries;
+    }
+
+    public function totalNumberOfFullParticipatingGymnasts(): int
+    {
+        return $this->totalNumberOfFullParticipatingGymnasts;
     }
 
     private function __construct()

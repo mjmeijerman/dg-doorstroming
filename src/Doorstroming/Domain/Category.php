@@ -116,6 +116,27 @@ final class Category
         ];
     }
 
+    public function compare(Category $other): int
+    {
+        if ($this->equals($other)) {
+            return 0;
+        }
+
+        foreach (self::allFromYoungToOld() as $category) {
+            if ($this->equals($category)) {
+                return -1;
+            }
+
+            if ($other->equals($category)) {
+                return 1;
+            }
+        }
+
+        throw new \LogicException(
+            sprintf('Found no result while comparing category "%s" with "%s"', $this->toString(), $other->toString())
+        );
+    }
+
     /**
      * @return self[]
      */

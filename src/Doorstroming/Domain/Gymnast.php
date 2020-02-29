@@ -18,20 +18,24 @@ final class Gymnast
 
     private int $rank;
 
+    private bool $participatedEntireCompetition;
+
     public static function create(
         GymnastId $gymnastId,
         string $name,
         string $club,
         float $totalScore,
-        float $eScore
+        float $eScore,
+        bool $participatedEntireCompetition
     ): self
     {
-        $self             = new self();
-        $self->gymnastId  = $gymnastId;
-        $self->name       = $name;
-        $self->club       = $club;
-        $self->totalScore = $totalScore;
-        $self->eScore     = $eScore;
+        $self                                = new self();
+        $self->gymnastId                     = $gymnastId;
+        $self->name                          = $name;
+        $self->club                          = $club;
+        $self->totalScore                    = $totalScore;
+        $self->eScore                        = $eScore;
+        $self->participatedEntireCompetition = $participatedEntireCompetition;
 
         return $self;
     }
@@ -79,6 +83,11 @@ final class Gymnast
     public function rank(): int
     {
         return $this->rank;
+    }
+
+    public function participatedEntireCompetition(): bool
+    {
+        return $this->participatedEntireCompetition;
     }
 
     private function __construct()
