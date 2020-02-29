@@ -144,6 +144,12 @@
     "laminas/laminas-zendframework-bridge": {
         "version": "1.0.1"
     },
+    "markbaker/complex": {
+        "version": "1.4.7"
+    },
+    "markbaker/matrix": {
+        "version": "1.2.0"
+    },
     "monolog/monolog": {
         "version": "2.0.2"
     },
@@ -176,6 +182,9 @@
     },
     "phpdocumentor/type-resolver": {
         "version": "1.1.0"
+    },
+    "phpoffice/phpspreadsheet": {
+        "version": "1.10.1"
     },
     "phpspec/prophecy": {
         "version": "v1.10.2"
@@ -229,6 +238,9 @@
     },
     "psr/log": {
         "version": "1.1.2"
+    },
+    "psr/simple-cache": {
+        "version": "1.0.1"
     },
     "ralouphie/getallheaders": {
         "version": "3.0.3"
