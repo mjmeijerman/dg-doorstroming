@@ -17,6 +17,7 @@ cache:
 
 install:
   - composer install --no-scripts --ignore-platform-reqs
+  - sudo cp .env.test .env
   - vendor/bin/codecept build
 
 before_script:
