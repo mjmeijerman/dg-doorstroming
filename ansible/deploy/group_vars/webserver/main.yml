@@ -62,6 +62,7 @@ project_unwanted_items:
 
 project_has_composer: yes
 project_copy_previous_composer_vendors: yes
+project_composer_binary: composer
 project_has_npm: no
 project_copy_previous_npm_modules: no
 
