@@ -17,7 +17,7 @@ final class ScoreSheets
     {
         Assertion::allIsInstanceOf($scoreSheets, ScoreSheet::class);
 
-        $self = new self();
+        $self              = new self();
         $self->scoreSheets = $scoreSheets;
 
         return $self;

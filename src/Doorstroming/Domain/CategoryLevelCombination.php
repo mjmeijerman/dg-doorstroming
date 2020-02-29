@@ -29,7 +29,11 @@ final class CategoryLevelCombination
         }
 
         return ($this->level->compare($other->level));
+    }
 
+    public function equals(CategoryLevelCombination $other): bool
+    {
+        return ($this->category->equals($other->category) && $this->level->equals($other->level));
     }
 
     public function category(): Category
