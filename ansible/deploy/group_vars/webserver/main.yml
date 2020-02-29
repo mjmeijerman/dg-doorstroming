@@ -10,10 +10,17 @@ application_root: ~
 application_env: prod
 php_socket: "{{ php7_fpm_pool_listen }}"
 
+project_shared_children:
+  - path: "/var/sessions"
+    src: "sessions"
+  - path: "/var/uploadedScores"
+    src: "uploadedScores"
+
 web_writable_folders:
   - { name: "{{ deploy_helper.new_release_path }}/var/cache", recursive: false }
   - { name: "{{ deploy_helper.new_release_path }}/var/log", recursive: false }
   - { name: "{{ deploy_helper.shared_path }}/sessions", recursive: false }
+  - { name: "{{ deploy_helper.shared_path }}/uploadedScores", recursive: false }
 
 project_root: "{{ application_root }}"
 project_git_repo: "{{ github_repo }}"
@@ -52,10 +59,6 @@ project_unwanted_items:
   - phpstan.neon
   - phpunit.xml.dist
   - Vagrantfile
-
-project_shared_children:
-  - path: "/var/sessions"
-    src: "sessions"
 
 project_has_composer: yes
 project_copy_previous_composer_vendors: yes

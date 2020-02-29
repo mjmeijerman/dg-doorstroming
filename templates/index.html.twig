@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <form method="post" enctype="multipart/form-data">
+        <label for="FirstCompetitionScores">Upload hier de excel sheet met de scores van de eerste plaatsingswedstrijd</label>
+        <input type="file" name="FirstCompetitionScores" id="FirstCompetitionScores" required>
+        <br/><br/>
+        <label for="SecondCompetitionScores">Upload hier de excel sheet met de scores van de tweede plaatsingswedstrijd</label>
+        <input type="file" name="SecondCompetitionScores" id="SecondCompetitionScores" required>
+        <br/><br/>
+        <input type="submit" value="Upload sheets" name="submit">
+    </form>
+{% endblock %}

@@ -144,6 +144,9 @@
     "laminas/laminas-zendframework-bridge": {
         "version": "1.0.1"
     },
+    "league/flysystem": {
+        "version": "1.0.64"
+    },
     "markbaker/complex": {
         "version": "1.4.7"
     },
@@ -244,6 +247,9 @@
     },
     "ralouphie/getallheaders": {
         "version": "3.0.3"
+    },
+    "ramsey/uuid": {
+        "version": "3.9.3"
     },
     "sebastian/code-unit-reverse-lookup": {
         "version": "2.0.0"
