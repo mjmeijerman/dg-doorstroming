@@ -1,4 +1,7 @@
 {
+    "beberlei/assert": {
+        "version": "v3.2.7"
+    },
     "behat/gherkin": {
         "version": "v4.6.1"
     },
