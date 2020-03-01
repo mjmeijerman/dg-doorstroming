@@ -21,6 +21,8 @@ final class DoorstromingList
 
     private int $numberOfSpotsAvailable;
 
+    private int $rank;
+
     public static function create(
         string $identifier,
         CategoryLevelCombination $categoryLevelCombination,
@@ -41,6 +43,24 @@ final class DoorstromingList
         $self->addRanking();
 
         return $self;
+    }
+
+    public function updateRank(int $rank): void
+    {
+        $this->rank = $rank;
+    }
+
+    public function compare(DoorstromingList $other): int
+    {
+        if ($this->totalNumberOfFullParticipatingGymnasts()
+            === $other->totalNumberOfFullParticipatingGymnasts()) {
+            return 0;
+        }
+
+        return (
+            $this->totalNumberOfFullParticipatingGymnasts()
+            > $other->totalNumberOfFullParticipatingGymnasts()
+        ) ? -1 : 1;
     }
 
     private function sortEntries(): void
@@ -107,9 +127,14 @@ final class DoorstromingList
         return $this->totalNumberOfFullParticipatingGymnasts;
     }
 
-    public function numberOfSpotsAvailabe(): int
+    public function numberOfSpotsAvailable(): int
     {
-        return $this->numberOfSpotsAvailabe;
+        return $this->numberOfSpotsAvailable;
+    }
+
+    public function rank(): int
+    {
+        return $this->rank;
     }
 
     private function __construct()
