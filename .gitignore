@@ -22,3 +22,5 @@ config/parameters.yaml
 /phpunit.xml
 .phpunit.result.cache
 ###< phpunit/phpunit ###
+
+tests/_output
