@@ -6,5 +6,5 @@ namespace Mark\Doorstroming\Domain;
 
 interface DoorstromingListCreator
 {
-    public function create(ScoreSheet $firstCompetition, ScoreSheet $secondCompetition): DoorstromingList;
+    public function create(ScoreSheet $firstCompetition, ScoreSheet $secondCompetition, int $numberOfSpotsAvailable): DoorstromingList;
 }

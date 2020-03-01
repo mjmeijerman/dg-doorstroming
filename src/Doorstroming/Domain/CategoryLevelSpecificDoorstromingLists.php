@@ -32,6 +32,23 @@ final class CategoryLevelSpecificDoorstromingLists
         return $self;
     }
 
+    /**
+     * @param int $rank
+     *
+     * @return DoorstromingList[]
+     */
+    private function findByRank(int $rank): array
+    {
+        $filteredList = [];
+        foreach ($this->doorstromingLists as $doorstromingList) {
+            if ($doorstromingList->rank() === $rank) {
+                $filteredList[] = $doorstromingList;
+            }
+        }
+
+        return $filteredList;
+    }
+
     private function divideExtraSpotsAvailable(): void
     {
         $this->addRankingToDoorstromingLists();
@@ -39,15 +56,26 @@ final class CategoryLevelSpecificDoorstromingLists
             return;
         }
 
-        // todo: hier zijn nog geen doorslaggevende regels voor. Wellicht in de toekomst dit meenemen
-        return;
-        foreach ($this->doorstromingLists as $doorstromingList) {
-            if ($this->numberOfExtraSpotsAvailable === 0) {
-                return;
+        $rank = 1;
+        while (true) {
+            $results = $this->findByRank($rank);
+            if (count($results) === 0) {
+                break;
             }
 
-            $this->subtractFromNumberOfExtraSpotsAvailable(1);
-            $doorstromingList->addExtraSpotAvailable(1);
+            if (count($results) > $this->numberOfExtraSpotsAvailable) {
+                break;
+            }
+
+            foreach ($results as $doorstromingList) {
+                $this->subtractFromNumberOfExtraSpotsAvailable(1);
+                $doorstromingList->addExtraSpotAvailable(1);
+                $rank++;
+            }
+
+            if ($this->numberOfExtraSpotsAvailable === 0) {
+                break;
+            }
         }
     }
 
@@ -113,6 +141,11 @@ final class CategoryLevelSpecificDoorstromingLists
     public function doorstromingLists(): array
     {
         return $this->doorstromingLists;
+    }
+
+    public function numberOfExtraSpotsAvailable(): int
+    {
+        return $this->numberOfExtraSpotsAvailable;
     }
 
     private function protect(): void

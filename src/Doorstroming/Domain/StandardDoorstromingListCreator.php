@@ -6,7 +6,7 @@ namespace Mark\Doorstroming\Domain;
 
 final class StandardDoorstromingListCreator implements DoorstromingListCreator
 {
-    public function create(ScoreSheet $firstCompetitionScoreSheet, ScoreSheet $secondCompetitionScoreSheet): DoorstromingList
+    public function create(ScoreSheet $firstCompetitionScoreSheet, ScoreSheet $secondCompetitionScoreSheet, int $numberOfSpotsAvailable): DoorstromingList
     {
         if ($firstCompetitionScoreSheet->identifier() !== $secondCompetitionScoreSheet->identifier()) {
             throw new \LogicException(
@@ -45,7 +45,8 @@ final class StandardDoorstromingListCreator implements DoorstromingListCreator
             $firstCompetitionScoreSheet->categoryLevelCombination(),
             $doorstromingEntries,
             $firstCompetitionScoreSheet->totalNumberOfFullParticipatedGymnasts()
-            + $secondCompetitionScoreSheet->totalNumberOfFullParticipatedGymnasts()
+            + $secondCompetitionScoreSheet->totalNumberOfFullParticipatedGymnasts(),
+            $numberOfSpotsAvailable
         );
     }
 }
