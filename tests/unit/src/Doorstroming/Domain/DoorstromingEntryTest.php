@@ -11,6 +11,32 @@ class DoorstromingEntryTest extends PHPUnit_Framework_TestCase
     /**
      * @test
      */
+    public function itRepresentsADoorstromingEntry()
+    {
+        $first = DoorstromingEntry::create(
+            'name 1',
+            'club 1',
+            1,
+            2,
+            45.03,
+            14.08,
+            47.93,
+            15.01
+        );
+
+        $this->assertSame('name 1', $first->gymnastName());
+        $this->assertSame('club 1', $first->gymnastClub());
+        $this->assertSame(1, $first->rankingFirstCompetition());
+        $this->assertSame(2, $first->rankingSecondCompetition());
+        $this->assertSame(45.03, $first->totalScoreFirstCompetition());
+        $this->assertSame(14.08, $first->eScoreFirstCompetition());
+        $this->assertSame(47.93, $first->totalScoreSecondCompetition());
+        $this->assertSame(15.01, $first->eScoreSecondCompetition());
+    }
+
+    /**
+     * @test
+     */
     public function itComparesTwoEntriesWithDifferentMaxRankings()
     {
         $first = DoorstromingEntry::create(

@@ -146,5 +146,7 @@ class DoorstromingListTest extends TestCase
         $this->assertSame(8, $entry8->totalRank());
         $this->assertSame(8, $entry9->totalRank());
         $this->assertSame(10, $entry10->totalRank());
+
+        $this->assertSame('Instap N3 groep A', $doorstromingList->identifier());
     }
 }

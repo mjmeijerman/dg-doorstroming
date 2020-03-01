@@ -58,13 +58,14 @@ class ScoreSheetTest extends TestCase
             true
         );
 
+        $categoryLevelCombination = CategoryLevelCombination::create(
+            Category::JEUGD1(),
+            Level::N3()
+        );
         $scoreSheet = ScoreSheet::create(
             'Medaillegroep A',
             1,
-            CategoryLevelCombination::create(
-                Category::JEUGD1(),
-                Level::N3()
-            ),
+            $categoryLevelCombination,
             [$gymnast1, $gymnast2, $gymnast3, $gymnast4, $gymnast5]
         );
 
@@ -76,5 +77,45 @@ class ScoreSheetTest extends TestCase
         $this->assertSame(3, $gymnast4->rank());
         $this->assertSame(5, $gymnast2->rank());
         $this->assertSame(4, $scoreSheet->totalNumberOfFullParticipatedGymnasts());
+        $this->assertSame('Medaillegroep A', $scoreSheet->identifier());
+        $this->assertSame(1, $scoreSheet->scoreSheetNumber());
+        $this->assertSame($categoryLevelCombination, $scoreSheet->categoryLevelCombination());
+    }
+
+    /**
+     * @test
+     */
+    public function itFindsAGymnast()
+    {
+        $gymnast1 = Gymnast::create(
+            GymnastId::fromInteger(1),
+            'Name 1',
+            'Club 1',
+            43.104,
+            12.30,
+            true
+        );
+
+        $gymnast2 = Gymnast::create(
+            GymnastId::fromInteger(2),
+            'Name 1',
+            'Club 1',
+            43.103,
+            12.30,
+            false
+        );
+
+        $scoreSheet = ScoreSheet::create(
+            'Medaillegroep A',
+            1,
+            CategoryLevelCombination::create(
+                Category::JEUGD1(),
+                Level::N3()
+            ),
+            [$gymnast1]
+        );
+
+        $this->assertSame($gymnast1, $scoreSheet->findGymnast($gymnast1->gymnastId()));
+        $this->assertNull($scoreSheet->findGymnast($gymnast2->gymnastId()));
     }
 }

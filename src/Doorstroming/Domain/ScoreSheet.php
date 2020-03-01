@@ -39,7 +39,7 @@ final class ScoreSheet
         return $self;
     }
 
-    public function findGymnast(GymnastId $gymnastId): Gymnast
+    public function findGymnast(GymnastId $gymnastId): ?Gymnast
     {
         foreach ($this->gymnasts as $gymnast) {
             if ($gymnast->gymnastId()->equals($gymnastId)) {
@@ -47,9 +47,7 @@ final class ScoreSheet
             }
         }
 
-        throw new \LogicException(
-            sprintf('Gymnast with number "%s" was not found in second competition score sheet', $gymnastId->toInteger())
-        );
+        return null;
     }
 
     private function sortGymnasts(): void

@@ -35,6 +35,14 @@ final class ScoreSheets
         return $categoryLevelCombinations;
     }
 
+    /**
+     * @return ScoreSheet[]
+     */
+    public function toArray(): array
+    {
+        return $this->scoreSheets;
+    }
+
     private function __construct()
     {
     }

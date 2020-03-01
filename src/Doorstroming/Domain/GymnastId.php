@@ -4,8 +4,6 @@ declare(strict_types=1);
 
 namespace Mark\Doorstroming\Domain;
 
-use phpDocumentor\Reflection\Types\Integer;
-
 final class GymnastId
 {
     private int $id;

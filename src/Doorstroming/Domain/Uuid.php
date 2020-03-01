@@ -41,11 +41,6 @@ abstract class Uuid
         return $this->value;
     }
 
-    public function __toString(): string
-    {
-        return $this->toString();
-    }
-
     private function __construct(string $uuid)
     {
         if (!RamseyUuid::isValid($uuid)) {

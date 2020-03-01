@@ -13,6 +13,28 @@ class GymnastTest extends TestCase
     /**
      * @test
      */
+    public function itRepresentsAGymnast()
+    {
+        $gymnast = Gymnast::create(
+            GymnastId::fromInteger(1),
+            'Name 1',
+            'Club 1',
+            43.104,
+            12.30,
+            true
+        );
+
+        $this->assertSame(1, $gymnast->gymnastId()->toInteger());
+        $this->assertSame('Name 1', $gymnast->name());
+        $this->assertSame('Club 1', $gymnast->club());
+        $this->assertSame(43.104, $gymnast->totalScore());
+        $this->assertSame(12.30, $gymnast->eScore());
+        $this->assertSame(true, $gymnast->participatedEntireCompetition());
+    }
+
+    /**
+     * @test
+     */
     public function itComparesTwoGymnastsWhenTheyAreEqual()
     {
         $gymnast1 = Gymnast::create(

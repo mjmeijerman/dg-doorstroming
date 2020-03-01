@@ -41,7 +41,7 @@ final class CategoryLevelCombinations
 
     public function push(CategoryLevelCombination $categoryLevelCombination): void
     {
-        if ($this->contains($categoryLevelCombination)) {
+        if (!$this->contains($categoryLevelCombination)) {
             $this->categoryLevelCombinations[] = $categoryLevelCombination;
             $this->sortList();
         }

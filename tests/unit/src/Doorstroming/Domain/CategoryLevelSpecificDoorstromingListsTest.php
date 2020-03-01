@@ -9,8 +9,8 @@ use PHPUnit\Framework\TestCase;
 class CategoryLevelSpecificDoorstromingListsTest extends TestCase
 {
     /**
- * @test
- */
+     * @test
+     */
     public function itCreatesSortedCategoryLevelSpecificDoorstromingListsAndAddsRankingAndDividesExtraSpots()
     {
         $entry1 = DoorstromingList::create(
@@ -193,8 +193,102 @@ class CategoryLevelSpecificDoorstromingListsTest extends TestCase
         $this->assertSame(3, $entry4->numberOfSpotsAvailable());
         $this->assertSame(3, $entry3->numberOfSpotsAvailable());
         $this->assertSame(3, $entry5->numberOfSpotsAvailable());
+        $this->assertTrue(
+            $categoryLevelSpecificDoostromingLists->categoryLevelCombination()->equals(
+                CategoryLevelCombination::create(
+                    Category::PUPIL2(),
+                    Level::N2()
+                )
+            )
+        );
 
         $this->assertSame(1, $categoryLevelSpecificDoostromingLists->numberOfExtraSpotsAvailable());
+    }
 
+    /**
+     * @test
+     */
+    public function itCreatesSortedCategoryLevelSpecificDoorstromingListsAndAddsRankingWithoutExtraSpots()
+    {
+        $entry1 = DoorstromingList::create(
+            'Identifier',
+            CategoryLevelCombination::create(
+                Category::PUPIL2(),
+                Level::N2()
+            ),
+            [],
+            15,
+            3
+        );
+
+        CategoryLevelSpecificDoorstromingLists::create(
+            CategoryLevelCombination::create(
+                Category::PUPIL2(),
+                Level::N2()
+            ),
+            [$entry1],
+            0
+        );
+
+        $this->assertSame(3, $entry1->numberOfSpotsAvailable());
+    }
+
+    /**
+     * @test
+     */
+    public function itCreatesSortedCategoryLevelSpecificDoorstromingListsAndReturnsWhenExtraSpotsCouldNotBeAdded()
+    {
+        $categoryLevelSpecificDoostromingLists = CategoryLevelSpecificDoorstromingLists::create(
+            CategoryLevelCombination::create(
+                Category::PUPIL2(),
+                Level::N2()
+            ),
+            [],
+            1
+        );
+
+        $this->assertSame(1, $categoryLevelSpecificDoostromingLists->numberOfExtraSpotsAvailable());
+    }
+
+    /**
+     * @test
+     */
+    public function itIsNotCreateWithDifferentCategoryLevelCombinations()
+    {
+        $entry1 = DoorstromingList::create(
+            'Identifier',
+            CategoryLevelCombination::create(
+                Category::PUPIL2(),
+                Level::N2()
+            ),
+            [],
+            15,
+            3
+        );
+
+        $entry2 = DoorstromingList::create(
+            'Identifier',
+            CategoryLevelCombination::create(
+                Category::PUPIL1(),
+                Level::N2()
+            ),
+            [],
+            18,
+            3
+        );
+
+        $this->expectException(\LogicException::class);
+        $this->expectExceptionMessage(
+            'Invalid category level combination found while creating category level specific lists'
+        );
+
+        CategoryLevelSpecificDoorstromingLists::create(
+            CategoryLevelCombination::create(
+                Category::PUPIL2(),
+                Level::N2()
+            ),
+            [$entry1, $entry2],
+            3
+        );
     }
 }

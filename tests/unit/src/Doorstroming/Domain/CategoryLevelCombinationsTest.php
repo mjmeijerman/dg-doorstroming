@@ -69,5 +69,16 @@ class CategoryLevelCombinationsTest extends TestCase
 
         $expectedList = [$entry7, $entry8, $entry9, $entry3, $entry2, $entry1, $entry10, $entry4, $entry6, $entry5];
         $this->assertSame($expectedList, $categoryLevelCombinations->categoryLevelCombinations());
+
+        $categoryLevelCombinations->push($entry4);
+        $this->assertSame($expectedList, $categoryLevelCombinations->categoryLevelCombinations());
+
+        $newEntry = CategoryLevelCombination::create(
+            Category::PUPIL1(),
+            Level::N3()
+        );
+        $newExpectedList = [$entry7, $entry8, $entry9, $entry3, $newEntry, $entry2, $entry1, $entry10, $entry4, $entry6, $entry5];
+        $categoryLevelCombinations->push($newEntry);
+        $this->assertSame($newExpectedList, $categoryLevelCombinations->categoryLevelCombinations());
     }
 }
