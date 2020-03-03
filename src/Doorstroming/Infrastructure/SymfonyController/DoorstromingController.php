@@ -24,9 +24,12 @@ final class DoorstromingController extends AbstractController
 
     private Filesystem $fileSystem;
 
-    public function __construct()
+    private string $uploadDir;
+
+    public function __construct(string $uploadDir)
     {
-        $this->fileSystem = new Filesystem(new Local($this->getUploadDirectory()));
+        $this->uploadDir  = $uploadDir;
+        $this->fileSystem = new Filesystem(new Local($this->uploadDir));
     }
 
     /**
@@ -282,7 +285,7 @@ final class DoorstromingController extends AbstractController
     private function processFileUploads(UploadedFile $firstCompetitionScores, UploadedFile $secondCompetitionScores): array
     {
         $fileHandler = new UploadedFileHandler(
-            $this->getUploadDirectory(),
+            $this->uploadDir,
             [
                 'text/csv',
                 'application/csv',
@@ -354,12 +357,7 @@ final class DoorstromingController extends AbstractController
 
     private function getFileLocationFromId(UploadedFileId $fileId): string
     {
-        return $this->getParameter('upload_dir') . $fileId->toString();
-    }
-
-    private function getUploadDirectory(): string
-    {
-        return $this->getParameter('upload_dir');
+        return $this->uploadDir . $fileId->toString();
     }
 
     private function removeFileById(UploadedFileId $fileId): void
