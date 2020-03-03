@@ -1,0 +1,27 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    {% for competitionType, files in doorstromingFiles %}
+        <h1>{{ competitionType }}</h1>
+        <p>
+            <a href="{{ path('downloadSpecificFile', {'fileName': attribute(files, 'Volledige lijsten')}) }}">Volledige lijsten</a><br/>
+            <a href="{{ path('downloadSpecificFile', {'fileName': attribute(files, 'Lijsten met alleen de doorgestroomde turnsters')}) }}">Lijsten met alleen de doorgestroomde turnsters</a><br/>
+            {% if files.Reserves is defined %}
+                <a href="{{ path('downloadSpecificFile', {'fileName': attribute(files, 'Reserves')}) }}">Reserves</a><br/>
+            {% endif %}
+        </p>
+        {% if files.extraSpotsAvailable is not empty %}
+            <b>Let op, bij de volgende categorien moeten nog aanwijsplekken verdeeld worden:</b>
+            <table>
+            {% for spots in files.extraSpotsAvailable %}
+                <tr>
+                    <td>{{ spots.category }} {{ spots.level }}:</td>
+                    <td>
+                        {{ spots.extraSpots }} {% if spots.extraSpots == 1 %}plek{% else %}plekken{% endif %}
+                    </td>
+                </tr>
+            {% endfor %}
+            </table>
+        {% endif %}
+    {% endfor %}
+{% endblock %}

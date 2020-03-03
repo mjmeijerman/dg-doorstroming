@@ -110,14 +110,14 @@ class CategoryLevelSpecificDoorstromingListsTest extends TestCase
         $this->assertSame(5, $entry3->rank());
         $this->assertSame(6, $entry5->rank());
 
-        $this->assertSame(4, $entry6->numberOfDistrictSpotsAvailable());
-        $this->assertSame(4, $entry2->numberOfDistrictSpotsAvailable());
-        $this->assertSame(4, $entry1->numberOfDistrictSpotsAvailable());
-        $this->assertSame(4, $entry4->numberOfDistrictSpotsAvailable());
-        $this->assertSame(4, $entry3->numberOfDistrictSpotsAvailable());
-        $this->assertSame(3, $entry5->numberOfDistrictSpotsAvailable());
+        $this->assertSame(4, $entry6->numberOfAvailableSpots(CompetitionType::DISTRICT()));
+        $this->assertSame(4, $entry2->numberOfAvailableSpots(CompetitionType::DISTRICT()));
+        $this->assertSame(4, $entry1->numberOfAvailableSpots(CompetitionType::DISTRICT()));
+        $this->assertSame(4, $entry4->numberOfAvailableSpots(CompetitionType::DISTRICT()));
+        $this->assertSame(4, $entry3->numberOfAvailableSpots(CompetitionType::DISTRICT()));
+        $this->assertSame(3, $entry5->numberOfAvailableSpots(CompetitionType::DISTRICT()));
 
-        $this->assertSame(0, $categoryLevelSpecificDoostromingLists->numberOfDistrictExtraSpots());
+        $this->assertSame(0, $categoryLevelSpecificDoostromingLists->numberOfExtraSpots(CompetitionType::DISTRICT()));
     }
 
     /**
@@ -213,12 +213,12 @@ class CategoryLevelSpecificDoorstromingListsTest extends TestCase
             0
         );
 
-        $this->assertSame(4, $entry6->numberOfDistrictSpotsAvailable());
-        $this->assertSame(4, $entry2->numberOfDistrictSpotsAvailable());
-        $this->assertSame(3, $entry1->numberOfDistrictSpotsAvailable());
-        $this->assertSame(3, $entry4->numberOfDistrictSpotsAvailable());
-        $this->assertSame(3, $entry3->numberOfDistrictSpotsAvailable());
-        $this->assertSame(3, $entry5->numberOfDistrictSpotsAvailable());
+        $this->assertSame(4, $entry6->numberOfAvailableSpots(CompetitionType::DISTRICT()));
+        $this->assertSame(4, $entry2->numberOfAvailableSpots(CompetitionType::DISTRICT()));
+        $this->assertSame(3, $entry1->numberOfAvailableSpots(CompetitionType::DISTRICT()));
+        $this->assertSame(3, $entry4->numberOfAvailableSpots(CompetitionType::DISTRICT()));
+        $this->assertSame(3, $entry3->numberOfAvailableSpots(CompetitionType::DISTRICT()));
+        $this->assertSame(3, $entry5->numberOfAvailableSpots(CompetitionType::DISTRICT()));
         $this->assertTrue(
             $categoryLevelSpecificDoostromingLists->categoryLevelCombination()->equals(
                 CategoryLevelCombination::create(
@@ -228,7 +228,7 @@ class CategoryLevelSpecificDoorstromingListsTest extends TestCase
             )
         );
 
-        $this->assertSame(1, $categoryLevelSpecificDoostromingLists->numberOfDistrictExtraSpots());
+        $this->assertSame(1, $categoryLevelSpecificDoostromingLists->numberOfExtraSpots(CompetitionType::DISTRICT()));
     }
 
     /**
@@ -259,7 +259,7 @@ class CategoryLevelSpecificDoorstromingListsTest extends TestCase
             0
         );
 
-        $this->assertSame(3, $entry1->numberOfDistrictSpotsAvailable());
+        $this->assertSame(3, $entry1->numberOfAvailableSpots(CompetitionType::DISTRICT()));
     }
 
     /**
@@ -277,7 +277,7 @@ class CategoryLevelSpecificDoorstromingListsTest extends TestCase
             0
         );
 
-        $this->assertSame(1, $categoryLevelSpecificDoostromingLists->numberOfDistrictExtraSpots());
+        $this->assertSame(1, $categoryLevelSpecificDoostromingLists->numberOfExtraSpots(CompetitionType::DISTRICT()));
     }
 
     /**

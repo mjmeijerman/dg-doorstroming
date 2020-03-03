@@ -25,6 +25,8 @@ final class DoorstromingList
 
     private int $numberOfDistrictReserveSpots;
 
+    private int $numberOfNationalReserveSpots = 0;
+
     private int $rank;
 
     public static function create(
@@ -130,6 +132,9 @@ final class DoorstromingList
         return $this->categoryLevelCombination;
     }
 
+    /**
+     * @return DoorstromingEntry[]
+     */
     public function doorstromingEntries(): array
     {
         return $this->doorstromingEntries;
@@ -140,18 +145,21 @@ final class DoorstromingList
         return $this->totalNumberOfFullParticipatingGymnasts;
     }
 
-    public function numberOfDistrictSpotsAvailable(): int
+    public function numberOfAvailableSpots(CompetitionType $competitionType): int
     {
+        if ($competitionType->equals(CompetitionType::NATIONAL())) {
+            return $this->numberOfNationalSpotsAvailable;
+        }
+
         return $this->numberOfDistrictSpotsAvailable;
     }
 
-    public function numberOfNationalSpotsAvailable(): int
+    public function numberOfReserveSpots(CompetitionType $competitionType): int
     {
-        return $this->numberOfNationalSpotsAvailable;
-    }
+        if ($competitionType->equals(CompetitionType::NATIONAL())) {
+            $this->numberOfNationalReserveSpots;
+        }
 
-    public function numberOfDistrictReserveSpots(): int
-    {
         return $this->numberOfDistrictReserveSpots;
     }
 

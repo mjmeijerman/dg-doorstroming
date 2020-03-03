@@ -193,19 +193,21 @@ final class CategoryLevelSpecificDoorstromingLists
         return $this->categoryLevelCombination;
     }
 
+    /**
+     * @return DoorstromingList[]
+     */
     public function doorstromingLists(): array
     {
         return $this->doorstromingLists;
     }
 
-    public function numberOfDistrictExtraSpots(): int
+    public function numberOfExtraSpots(CompetitionType $competitionType): int
     {
-        return $this->numberOfDistrictExtraSpots;
-    }
+        if ($competitionType->equals(CompetitionType::NATIONAL())) {
+            return $this->numberOfNationalExtraSpots;
+        }
 
-    public function numberOfNationalExtraSpots(): int
-    {
-        return $this->numberOfNationalExtraSpots;
+        return $this->numberOfDistrictExtraSpots;
     }
 
     private function protect(): void
