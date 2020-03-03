@@ -34,7 +34,10 @@ final class CategoryLevelCombinations
         );
     }
 
-    public function categoryLevelCombinations(): array
+    /**
+     * @return CategoryLevelCombination[]
+     */
+    public function toArray(): array
     {
         return $this->categoryLevelCombinations;
     }

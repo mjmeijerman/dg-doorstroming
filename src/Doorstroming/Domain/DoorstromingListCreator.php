@@ -6,7 +6,13 @@ namespace Mark\Doorstroming\Domain;
 
 final class DoorstromingListCreator
 {
-    public static function create(ScoreSheet $firstCompetitionScoreSheet, ScoreSheet $secondCompetitionScoreSheet, int $numberOfSpotsAvailable): DoorstromingList
+    public static function create(
+        ScoreSheet $firstCompetitionScoreSheet,
+        ScoreSheet $secondCompetitionScoreSheet,
+        int $numberOfDistrictSpotsAvailable,
+        int $numberOfNationalSpotsAvailable,
+        int $numberOfReserveSpots
+    ): DoorstromingList
     {
         if ($firstCompetitionScoreSheet->identifier() !== $secondCompetitionScoreSheet->identifier()) {
             throw new \LogicException(
@@ -28,12 +34,9 @@ final class DoorstromingListCreator
                 $secondCompetitionGymnast->gymnastId()
             );
             if (!$firstCompetitionGymnast) {
-                throw new \LogicException(
-                    sprintf(
-                        'Gymnast with number "%s" was not found in first competition score sheet',
-                        $secondCompetitionGymnast->gymnastId()->toInteger()
-                    )
-                );
+                $firstCompetitionGymnast = self::createGymnastWhenItDoesNotExist($secondCompetitionGymnast);
+                $firstCompetitionScoreSheet->pushGymnast($firstCompetitionGymnast);
+                $firstCompetitionScoreSheet->addRanking();
             }
         }
         foreach ($firstCompetitionScoreSheet->gymnasts() as $firstCompetitionGymnast) {
@@ -41,12 +44,9 @@ final class DoorstromingListCreator
                 $firstCompetitionGymnast->gymnastId()
             );
             if (!$secondCompetitionGymnast) {
-                throw new \LogicException(
-                    sprintf(
-                        'Gymnast with number "%s" was not found in second competition score sheet',
-                        $firstCompetitionGymnast->gymnastId()->toInteger()
-                    )
-                );
+                $secondCompetitionGymnast = self::createGymnastWhenItDoesNotExist($firstCompetitionGymnast);
+                $secondCompetitionScoreSheet->pushGymnast($secondCompetitionGymnast);
+                $secondCompetitionScoreSheet->addRanking();
             }
 
             $doorstromingEntries[] = DoorstromingEntry::create(
@@ -67,7 +67,21 @@ final class DoorstromingListCreator
             $doorstromingEntries,
             $firstCompetitionScoreSheet->totalNumberOfFullParticipatedGymnasts()
             + $secondCompetitionScoreSheet->totalNumberOfFullParticipatedGymnasts(),
-            $numberOfSpotsAvailable
+            $numberOfDistrictSpotsAvailable,
+            $numberOfNationalSpotsAvailable,
+            $numberOfReserveSpots
+        );
+    }
+
+    private static function createGymnastWhenItDoesNotExist(Gymnast $gymnast)
+    {
+        return Gymnast::create(
+            $gymnast->gymnastId(),
+            $gymnast->name(),
+            $gymnast->club(),
+            0,
+            0,
+            false
         );
     }
 }

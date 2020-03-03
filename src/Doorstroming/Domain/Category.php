@@ -174,6 +174,48 @@ final class Category
         return $other->toString() === $this->toString();
     }
 
+    public function guess(string $supposedToBeACategory): self
+    {
+        $hayStack = strtolower($supposedToBeACategory);
+        if (strpos($hayStack, 'mini') !== false) {
+            return self::MINI();
+        }
+
+        if (strpos($hayStack, 'instap') !== false) {
+            if (strpos($hayStack, 'voor') !== false) {
+                return self::VOORINSTAP();
+            }
+
+            return self::INSTAP();
+        }
+
+        if (strpos($hayStack, 'pupil1') !== false || strpos($hayStack, 'pupil-1') !== false || strpos($hayStack, 'pupil 1') !== false) {
+            return self::PUPIL1();
+        }
+
+        if (strpos($hayStack, 'pupil2') !== false || strpos($hayStack, 'pupil-2') !== false || strpos($hayStack, 'pupil 2') !== false) {
+            return self::PUPIL2();
+        }
+
+        if (strpos($hayStack, 'jeugd1') !== false || strpos($hayStack, 'jeugd-1') !== false || strpos($hayStack, 'jeugd 1') !== false) {
+            return self::JEUGD1();
+        }
+
+        if (strpos($hayStack, 'jeugd2') !== false || strpos($hayStack, 'jeugd-2') !== false || strpos($hayStack, 'jeugd 2') !== false) {
+            return self::JEUGD2();
+        }
+
+        if (strpos($hayStack, 'junior') !== false) {
+            return self::JUNIOR();
+        }
+
+        if (strpos($hayStack, 'senior') !== false) {
+            return self::SENIOR();
+        }
+
+        throw new \LogicException(sprintf('Could not guess the category from input "%s"', $supposedToBeACategory));
+    }
+
     private function __construct()
     {
     }

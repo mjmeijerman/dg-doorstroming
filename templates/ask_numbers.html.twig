@@ -1,0 +1,91 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <style>
+        .submit {
+            background: #267F00;
+            color: #FFF;
+            padding: .5em .7em;
+            margin: 3em auto 0 auto;
+            border: 0;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+    </style>
+    {% for error in errors %}
+        <p><b>Error: </b>{{ error }}</p>
+    {% endfor %}
+
+    <form method="post">
+        <h1>Controleer aantallen</h1>
+        <p>Controleer hier de doorstromingsaantallen en pas waar nodig aan. Als je op de knop onderaan de pagina klikt
+            worden de doorstromingen gegenereerd.</p>
+
+        {% for categoryLevel in categoryLevels %}
+            <h2>{{ categoryLevel.category }} {{ categoryLevel.level }}</h2>
+            <p>
+                De volgende groepen zijn gevonden:
+                {% for identifier in categoryLevel.identifiers %}
+                    {{ identifier }}{% if not loop.last %}, {% endif %}
+                {% endfor %}
+            </p>
+            <table border="1">
+                <tr>
+                    <th>Doorstromingsplekken naar</th>
+                    <th>Aantal plekken per groep</th>
+                    <th>Extra (aanwijs)plekken</th>
+                </tr>
+                <tr>
+                    <td>Districtsfinale</td>
+                    <td>
+                        <input type="number" value="{{ categoryLevel.districtNumberOfSpots }}"
+                               name="{{ categoryLevel.category }}-{{ categoryLevel.level }}-district" required/>
+                    </td>
+                    <td>
+                        <input type="number" value="{{ categoryLevel.districtNumberOfExtraSpots }}"
+                               name="{{ categoryLevel.category }}-{{ categoryLevel.level }}-district-extra" required/>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Districtsfinale reserves</td>
+                    <td>
+                        <input type="number" value="{{ categoryLevel.districtNumberOfReserveSpots }}"
+                               name="{{ categoryLevel.category }}-{{ categoryLevel.level }}-district-reserve" required/>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Toestelfinale</td>
+                    <td>
+                        <input type="number" value="{{ categoryLevel.apparatusNumberOfSpots }}"
+                               name="{{ categoryLevel.category }}-{{ categoryLevel.level }}-apparatus" required/>
+                    </td>
+                    <td>
+                        <input type="number" value="{{ categoryLevel.apparatusNumberOfExtraSpots }}"
+                               name="{{ categoryLevel.category }}-{{ categoryLevel.level }}-apparatus-extra" required/>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Toestelfinale reserves</td>
+                    <td>
+                        <input type="number" value="{{ categoryLevel.apparatusNumberOfReserveSpots }}"
+                               name="{{ categoryLevel.category }}-{{ categoryLevel.level }}-apparatus-reserve"
+                               required/>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Nationale doostroming</td>
+                    <td>
+                        <input type="number" value="{{ categoryLevel.nationalSpots }}"
+                               name="{{ categoryLevel.category }}-{{ categoryLevel.level }}-national" required/>
+                    </td>
+                    <td>
+                        <input type="number" value="{{ categoryLevel.nationalExtraSpots }}"
+                               name="{{ categoryLevel.category }}-{{ categoryLevel.level }}-national-extra" required/>
+                    </td>
+                </tr>
+
+            </table>
+        {% endfor %}
+        <input type="submit" class="submit" value="De doorstromingsaantallen kloppen"/>
+    </form>
+{% endblock %}

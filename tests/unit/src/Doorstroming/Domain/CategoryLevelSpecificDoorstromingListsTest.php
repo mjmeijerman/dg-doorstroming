@@ -21,7 +21,9 @@ class CategoryLevelSpecificDoorstromingListsTest extends TestCase
             ),
             [],
             15,
-            3
+            3,
+            0,
+            0
         );
 
         $entry2 = DoorstromingList::create(
@@ -32,7 +34,9 @@ class CategoryLevelSpecificDoorstromingListsTest extends TestCase
             ),
             [],
             18,
-            3
+            3,
+            0,
+            0
         );
 
         $entry3 = DoorstromingList::create(
@@ -43,7 +47,9 @@ class CategoryLevelSpecificDoorstromingListsTest extends TestCase
             ),
             [],
             13,
-            3
+            3,
+            0,
+            0
         );
 
         $entry4 = DoorstromingList::create(
@@ -54,7 +60,9 @@ class CategoryLevelSpecificDoorstromingListsTest extends TestCase
             ),
             [],
             15,
-            3
+            3,
+            0,
+            0
         );
 
         $entry5 = DoorstromingList::create(
@@ -65,7 +73,9 @@ class CategoryLevelSpecificDoorstromingListsTest extends TestCase
             ),
             [],
             12,
-            3
+            3,
+            0,
+            0
         );
 
         $entry6 = DoorstromingList::create(
@@ -76,7 +86,9 @@ class CategoryLevelSpecificDoorstromingListsTest extends TestCase
             ),
             [],
             20,
-            3
+            3,
+            0,
+            0
         );
 
         $categoryLevelSpecificDoostromingLists = CategoryLevelSpecificDoorstromingLists::create(
@@ -85,7 +97,8 @@ class CategoryLevelSpecificDoorstromingListsTest extends TestCase
                 Level::N2()
             ),
             [$entry1, $entry2, $entry3, $entry4, $entry5, $entry6],
-            5
+            5,
+            0
         );
 
         $expectedList = [$entry6, $entry2, $entry1, $entry4, $entry3, $entry5];
@@ -97,14 +110,14 @@ class CategoryLevelSpecificDoorstromingListsTest extends TestCase
         $this->assertSame(5, $entry3->rank());
         $this->assertSame(6, $entry5->rank());
 
-        $this->assertSame(4, $entry6->numberOfSpotsAvailable());
-        $this->assertSame(4, $entry2->numberOfSpotsAvailable());
-        $this->assertSame(4, $entry1->numberOfSpotsAvailable());
-        $this->assertSame(4, $entry4->numberOfSpotsAvailable());
-        $this->assertSame(4, $entry3->numberOfSpotsAvailable());
-        $this->assertSame(3, $entry5->numberOfSpotsAvailable());
+        $this->assertSame(4, $entry6->numberOfDistrictSpotsAvailable());
+        $this->assertSame(4, $entry2->numberOfDistrictSpotsAvailable());
+        $this->assertSame(4, $entry1->numberOfDistrictSpotsAvailable());
+        $this->assertSame(4, $entry4->numberOfDistrictSpotsAvailable());
+        $this->assertSame(4, $entry3->numberOfDistrictSpotsAvailable());
+        $this->assertSame(3, $entry5->numberOfDistrictSpotsAvailable());
 
-        $this->assertSame(0, $categoryLevelSpecificDoostromingLists->numberOfExtraSpotsAvailable());
+        $this->assertSame(0, $categoryLevelSpecificDoostromingLists->numberOfDistrictExtraSpots());
     }
 
     /**
@@ -120,7 +133,9 @@ class CategoryLevelSpecificDoorstromingListsTest extends TestCase
             ),
             [],
             15,
-            3
+            3,
+            0,
+            0
         );
 
         $entry2 = DoorstromingList::create(
@@ -131,7 +146,9 @@ class CategoryLevelSpecificDoorstromingListsTest extends TestCase
             ),
             [],
             18,
-            3
+            3,
+            0,
+            0
         );
 
         $entry3 = DoorstromingList::create(
@@ -142,7 +159,9 @@ class CategoryLevelSpecificDoorstromingListsTest extends TestCase
             ),
             [],
             13,
-            3
+            3,
+            0,
+            0
         );
 
         $entry4 = DoorstromingList::create(
@@ -153,7 +172,9 @@ class CategoryLevelSpecificDoorstromingListsTest extends TestCase
             ),
             [],
             15,
-            3
+            3,
+            0,
+            0
         );
 
         $entry5 = DoorstromingList::create(
@@ -164,7 +185,9 @@ class CategoryLevelSpecificDoorstromingListsTest extends TestCase
             ),
             [],
             12,
-            3
+            3,
+            0,
+            0
         );
 
         $entry6 = DoorstromingList::create(
@@ -175,7 +198,9 @@ class CategoryLevelSpecificDoorstromingListsTest extends TestCase
             ),
             [],
             20,
-            3
+            3,
+            0,
+            0
         );
 
         $categoryLevelSpecificDoostromingLists = CategoryLevelSpecificDoorstromingLists::create(
@@ -184,15 +209,16 @@ class CategoryLevelSpecificDoorstromingListsTest extends TestCase
                 Level::N2()
             ),
             [$entry1, $entry2, $entry3, $entry4, $entry5, $entry6],
-            3
+            3,
+            0
         );
 
-        $this->assertSame(4, $entry6->numberOfSpotsAvailable());
-        $this->assertSame(4, $entry2->numberOfSpotsAvailable());
-        $this->assertSame(3, $entry1->numberOfSpotsAvailable());
-        $this->assertSame(3, $entry4->numberOfSpotsAvailable());
-        $this->assertSame(3, $entry3->numberOfSpotsAvailable());
-        $this->assertSame(3, $entry5->numberOfSpotsAvailable());
+        $this->assertSame(4, $entry6->numberOfDistrictSpotsAvailable());
+        $this->assertSame(4, $entry2->numberOfDistrictSpotsAvailable());
+        $this->assertSame(3, $entry1->numberOfDistrictSpotsAvailable());
+        $this->assertSame(3, $entry4->numberOfDistrictSpotsAvailable());
+        $this->assertSame(3, $entry3->numberOfDistrictSpotsAvailable());
+        $this->assertSame(3, $entry5->numberOfDistrictSpotsAvailable());
         $this->assertTrue(
             $categoryLevelSpecificDoostromingLists->categoryLevelCombination()->equals(
                 CategoryLevelCombination::create(
@@ -202,7 +228,7 @@ class CategoryLevelSpecificDoorstromingListsTest extends TestCase
             )
         );
 
-        $this->assertSame(1, $categoryLevelSpecificDoostromingLists->numberOfExtraSpotsAvailable());
+        $this->assertSame(1, $categoryLevelSpecificDoostromingLists->numberOfDistrictExtraSpots());
     }
 
     /**
@@ -218,7 +244,9 @@ class CategoryLevelSpecificDoorstromingListsTest extends TestCase
             ),
             [],
             15,
-            3
+            3,
+            0,
+            0
         );
 
         CategoryLevelSpecificDoorstromingLists::create(
@@ -227,10 +255,11 @@ class CategoryLevelSpecificDoorstromingListsTest extends TestCase
                 Level::N2()
             ),
             [$entry1],
+            0,
             0
         );
 
-        $this->assertSame(3, $entry1->numberOfSpotsAvailable());
+        $this->assertSame(3, $entry1->numberOfDistrictSpotsAvailable());
     }
 
     /**
@@ -244,10 +273,11 @@ class CategoryLevelSpecificDoorstromingListsTest extends TestCase
                 Level::N2()
             ),
             [],
-            1
+            1,
+            0
         );
 
-        $this->assertSame(1, $categoryLevelSpecificDoostromingLists->numberOfExtraSpotsAvailable());
+        $this->assertSame(1, $categoryLevelSpecificDoostromingLists->numberOfDistrictExtraSpots());
     }
 
     /**
@@ -263,7 +293,9 @@ class CategoryLevelSpecificDoorstromingListsTest extends TestCase
             ),
             [],
             15,
-            3
+            3,
+            0,
+            0
         );
 
         $entry2 = DoorstromingList::create(
@@ -274,7 +306,9 @@ class CategoryLevelSpecificDoorstromingListsTest extends TestCase
             ),
             [],
             18,
-            3
+            3,
+            0,
+            0
         );
 
         $this->expectException(\LogicException::class);
@@ -288,7 +322,8 @@ class CategoryLevelSpecificDoorstromingListsTest extends TestCase
                 Level::N2()
             ),
             [$entry1, $entry2],
-            3
+            3,
+            0
         );
     }
 }

@@ -60,7 +60,7 @@ final class ScoreSheet
         );
     }
 
-    private function addRanking(): void
+    public function addRanking(): void
     {
         $this->sortGymnasts();
 
@@ -87,6 +87,16 @@ final class ScoreSheet
             $rank++;
             $previousGymnast = $gymnast;
         }
+    }
+
+    public function pushGymnast(Gymnast $gymnast): void
+    {
+        $existingGymnast = $this->findGymnast($gymnast->gymnastId());
+        if ($existingGymnast) {
+            return;
+        }
+
+        $this->gymnasts[] = $gymnast;
     }
 
     public function totalNumberOfFullParticipatedGymnasts(): int

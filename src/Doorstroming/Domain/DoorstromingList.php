@@ -19,7 +19,11 @@ final class DoorstromingList
 
     private int $totalNumberOfFullParticipatingGymnasts;
 
-    private int $numberOfSpotsAvailable;
+    private int $numberOfDistrictSpotsAvailable;
+
+    private int $numberOfNationalSpotsAvailable;
+
+    private int $numberOfDistrictReserveSpots;
 
     private int $rank;
 
@@ -28,7 +32,9 @@ final class DoorstromingList
         CategoryLevelCombination $categoryLevelCombination,
         array $doorstromingEntries,
         int $totalNumberOfFullParticipatingGymnasts,
-        int $numberOfSpotsAvailable
+        int $numberOfDistrictSpotsAvailable,
+        int $numberOfNationalSpotsAvailable,
+        int $numberOfDistrictReserveSpots
     ): self
     {
         Assertion::allIsInstanceOf($doorstromingEntries, DoorstromingEntry::class);
@@ -38,7 +44,9 @@ final class DoorstromingList
         $self->categoryLevelCombination               = $categoryLevelCombination;
         $self->doorstromingEntries                    = $doorstromingEntries;
         $self->totalNumberOfFullParticipatingGymnasts = $totalNumberOfFullParticipatingGymnasts;
-        $self->numberOfSpotsAvailable                 = $numberOfSpotsAvailable;
+        $self->numberOfDistrictSpotsAvailable         = $numberOfDistrictSpotsAvailable;
+        $self->numberOfNationalSpotsAvailable         = $numberOfNationalSpotsAvailable;
+        $self->numberOfDistrictReserveSpots           = $numberOfDistrictReserveSpots;
 
         $self->addRanking();
 
@@ -73,9 +81,14 @@ final class DoorstromingList
         );
     }
 
-    public function addExtraSpotAvailable(int $number): void
+    public function addDistrictExtraSpotAvailable(int $number): void
     {
-        $this->numberOfSpotsAvailable = $this->numberOfSpotsAvailable + $number;
+        $this->numberOfDistrictSpotsAvailable = $this->numberOfDistrictSpotsAvailable + $number;
+    }
+
+    public function addNationalExtraSpotAvailable(int $number): void
+    {
+        $this->numberOfNationalSpotsAvailable = $this->numberOfNationalSpotsAvailable + $number;
     }
 
     private function addRanking(): void
@@ -127,9 +140,19 @@ final class DoorstromingList
         return $this->totalNumberOfFullParticipatingGymnasts;
     }
 
-    public function numberOfSpotsAvailable(): int
+    public function numberOfDistrictSpotsAvailable(): int
     {
-        return $this->numberOfSpotsAvailable;
+        return $this->numberOfDistrictSpotsAvailable;
+    }
+
+    public function numberOfNationalSpotsAvailable(): int
+    {
+        return $this->numberOfNationalSpotsAvailable;
+    }
+
+    public function numberOfDistrictReserveSpots(): int
+    {
+        return $this->numberOfDistrictReserveSpots;
     }
 
     public function rank(): int

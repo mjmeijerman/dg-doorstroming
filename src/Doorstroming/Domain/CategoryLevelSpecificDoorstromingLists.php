@@ -16,16 +16,24 @@ final class CategoryLevelSpecificDoorstromingLists
      */
     private array $doorstromingLists;
 
-    private int $numberOfExtraSpotsAvailable;
+    private int $numberOfDistrictExtraSpots;
 
-    public static function create(CategoryLevelCombination $categoryLevelCombination, array $doorstromingLists, int $numberOfExtraSpotsAvailable): self
+    private int $numberOfNationalExtraSpots;
+
+    public static function create(
+        CategoryLevelCombination $categoryLevelCombination,
+        array $doorstromingLists,
+        int $numberOfDistrictExtraSpots,
+        int $numberOfNationalExtraSpots
+    ): self
     {
         Assertion::allIsInstanceOf($doorstromingLists, DoorstromingList::class);
 
-        $self                              = new self();
-        $self->categoryLevelCombination    = $categoryLevelCombination;
-        $self->doorstromingLists           = $doorstromingLists;
-        $self->numberOfExtraSpotsAvailable = $numberOfExtraSpotsAvailable;
+        $self                             = new self();
+        $self->categoryLevelCombination   = $categoryLevelCombination;
+        $self->doorstromingLists          = $doorstromingLists;
+        $self->numberOfDistrictExtraSpots = $numberOfDistrictExtraSpots;
+        $self->numberOfNationalExtraSpots = $numberOfNationalExtraSpots;
         $self->protect();
         $self->divideExtraSpotsAvailable();
 
@@ -52,7 +60,7 @@ final class CategoryLevelSpecificDoorstromingLists
     private function divideExtraSpotsAvailable(): void
     {
         $this->addRankingToDoorstromingLists();
-        if ($this->numberOfExtraSpotsAvailable === 0) {
+        if ($this->numberOfDistrictExtraSpots === 0) {
             return;
         }
 
@@ -63,17 +71,39 @@ final class CategoryLevelSpecificDoorstromingLists
                 break;
             }
 
-            if (count($results) > $this->numberOfExtraSpotsAvailable) {
+            if (count($results) > $this->numberOfDistrictExtraSpots) {
                 break;
             }
 
             foreach ($results as $doorstromingList) {
-                $this->subtractFromNumberOfExtraSpotsAvailable(1);
-                $doorstromingList->addExtraSpotAvailable(1);
+                $this->subtractFromNumberOfDistrictExtraSpotsAvailable(1);
+                $doorstromingList->addDistrictExtraSpotAvailable(1);
                 $rank++;
             }
 
-            if ($this->numberOfExtraSpotsAvailable === 0) {
+            if ($this->numberOfDistrictExtraSpots === 0) {
+                break;
+            }
+        }
+
+        $rank = 1;
+        while (true) {
+            $results = $this->findByRank($rank);
+            if (count($results) === 0) {
+                break;
+            }
+
+            if (count($results) > $this->numberOfNationalExtraSpots) {
+                break;
+            }
+
+            foreach ($results as $doorstromingList) {
+                $this->subtractFromNumberOfNationalExtraSpotsAvailable(1);
+                $doorstromingList->addNationalExtraSpotAvailable(1);
+                $rank++;
+            }
+
+            if ($this->numberOfNationalExtraSpots === 0) {
                 break;
             }
         }
@@ -84,7 +114,7 @@ final class CategoryLevelSpecificDoorstromingLists
         $this->sortDoorstromingLists();
 
         $previousList = null;
-        $rank          = 1;
+        $rank         = 1;
         foreach ($this->doorstromingLists as $doorstromingList) {
             if (!$previousList) {
                 $doorstromingList->updateRank($rank);
@@ -118,19 +148,44 @@ final class CategoryLevelSpecificDoorstromingLists
         );
     }
 
-    private function subtractFromNumberOfExtraSpotsAvailable(int $number): void
+    public function sortByIdentifier(): void
     {
-        if ($number > $this->numberOfExtraSpotsAvailable) {
+        usort(
+            $this->doorstromingLists,
+            function (DoorstromingList $firstList, DoorstromingList $otherList) {
+                return strcmp($firstList->identifier(), $otherList->identifier());
+            }
+        );
+    }
+
+    private function subtractFromNumberOfDistrictExtraSpotsAvailable(int $number): void
+    {
+        if ($number > $this->numberOfDistrictExtraSpots) {
             throw new LogicException(
                 sprintf(
                     'Trying to subtract "%d" spots, but only "%d" extra spots are available"',
                     $number,
-                    $this->numberOfExtraSpotsAvailable
+                    $this->numberOfDistrictExtraSpots
                 )
             );
         }
 
-        $this->numberOfExtraSpotsAvailable = $this->numberOfExtraSpotsAvailable - $number;
+        $this->numberOfDistrictExtraSpots = $this->numberOfDistrictExtraSpots - $number;
+    }
+
+    private function subtractFromNumberOfNationalExtraSpotsAvailable(int $number): void
+    {
+        if ($number > $this->numberOfDistrictExtraSpots) {
+            throw new LogicException(
+                sprintf(
+                    'Trying to subtract "%d" spots, but only "%d" extra spots are available"',
+                    $number,
+                    $this->numberOfDistrictExtraSpots
+                )
+            );
+        }
+
+        $this->numberOfDistrictExtraSpots = $this->numberOfDistrictExtraSpots - $number;
     }
 
     public function categoryLevelCombination(): CategoryLevelCombination
@@ -143,9 +198,14 @@ final class CategoryLevelSpecificDoorstromingLists
         return $this->doorstromingLists;
     }
 
-    public function numberOfExtraSpotsAvailable(): int
+    public function numberOfDistrictExtraSpots(): int
     {
-        return $this->numberOfExtraSpotsAvailable;
+        return $this->numberOfDistrictExtraSpots;
+    }
+
+    public function numberOfNationalExtraSpots(): int
+    {
+        return $this->numberOfNationalExtraSpots;
     }
 
     private function protect(): void

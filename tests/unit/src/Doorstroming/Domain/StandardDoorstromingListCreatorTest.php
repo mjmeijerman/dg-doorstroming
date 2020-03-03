@@ -86,7 +86,9 @@ class DoorstromingListCreatorTest extends PHPUnit_Framework_TestCase
         DoorstromingListCreator::create(
             $firstCompetitionScoreSheet,
             $secondCompetitionScoreSheet,
-            $numberOfSpotsAvailable
+            $numberOfSpotsAvailable,
+            1,
+            1
         );
     }
 
@@ -164,14 +166,16 @@ class DoorstromingListCreatorTest extends PHPUnit_Framework_TestCase
         DoorstromingListCreator::create(
             $firstCompetitionScoreSheet,
             $secondCompetitionScoreSheet,
-            $numberOfSpotsAvailable
+            $numberOfSpotsAvailable,
+            1,
+            1
         );
     }
 
     /**
      * @test
      */
-    public function itDoesNotCreateAListWithMissingGymnastInSecondSheet()
+    public function itCreatesAListWithMissingGymnastInSecondSheetByAddingThemToThatList()
     {
         $gymnast1  = Gymnast::create(
             GymnastId::fromInteger(1),
@@ -237,19 +241,19 @@ class DoorstromingListCreatorTest extends PHPUnit_Framework_TestCase
         );
         $numberOfSpotsAvailable      = 4;
 
-        $this->expectException(LogicException::class);
-        $this->expectExceptionMessage('Gymnast with number "2" was not found in second competition score sheet');
         DoorstromingListCreator::create(
             $firstCompetitionScoreSheet,
             $secondCompetitionScoreSheet,
-            $numberOfSpotsAvailable
+            $numberOfSpotsAvailable,
+            1,
+            1
         );
     }
 
     /**
      * @test
      */
-    public function itDoesNotCreateAListWithMissingGymnastInFirstSheet()
+    public function itCreatesAListWithMissingGymnastInFirstSheet()
     {
         $gymnast1  = Gymnast::create(
             GymnastId::fromInteger(1),
@@ -315,12 +319,12 @@ class DoorstromingListCreatorTest extends PHPUnit_Framework_TestCase
         );
         $numberOfSpotsAvailable      = 4;
 
-        $this->expectException(LogicException::class);
-        $this->expectExceptionMessage('Gymnast with number "2" was not found in first competition score sheet');
         DoorstromingListCreator::create(
             $firstCompetitionScoreSheet,
             $secondCompetitionScoreSheet,
-            $numberOfSpotsAvailable
+            $numberOfSpotsAvailable,
+            1,
+            1
         );
     }
 
@@ -397,7 +401,9 @@ class DoorstromingListCreatorTest extends PHPUnit_Framework_TestCase
         $result = DoorstromingListCreator::create(
             $firstCompetitionScoreSheet,
             $secondCompetitionScoreSheet,
-            $numberOfSpotsAvailable
+            $numberOfSpotsAvailable,
+            1,
+            1
         );
 
         $this->assertInstanceOf(DoorstromingList::class, $result);

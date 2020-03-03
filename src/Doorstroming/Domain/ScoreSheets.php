@@ -23,6 +23,45 @@ final class ScoreSheets
         return $self;
     }
 
+    /**
+     * @param CategoryLevelCombination $categoryLevelCombination
+     *
+     * @return ScoreSheet[]
+     */
+    public function findByCategoryLevelCombination(CategoryLevelCombination $categoryLevelCombination): array
+    {
+        $scoreSheets = [];
+        foreach ($this->scoreSheets as $scoreSheet) {
+            if ($scoreSheet->categoryLevelCombination()->equals($categoryLevelCombination)) {
+                $scoreSheets[] = $scoreSheet;
+            }
+        }
+
+        return $scoreSheets;
+    }
+
+    public function findByIdentifier(string $identifier): ?ScoreSheet
+    {
+        foreach ($this->scoreSheets as $scoreSheet) {
+            if ($scoreSheet->identifier() === $identifier) {
+                return $scoreSheet;
+            }
+        }
+
+        return null;
+    }
+
+    public function getAllIdentifiers(): array
+    {
+        $identifiers = [];
+        foreach ($this->scoreSheets as $scoreSheet) {
+            $identifiers[] = $scoreSheet->identifier();
+        }
+        sort($identifiers);
+
+        return $identifiers;
+    }
+
     public function getCategoryLevelCombinations(): CategoryLevelCombinations
     {
         $categoryLevelCombinations = CategoryLevelCombinations::create([]);

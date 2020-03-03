@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Mark\Doorstroming\Domain;
 
 use Assert\Assertion;
+use Composer\Package\Package;
 
 final class Level
 {
@@ -279,6 +280,168 @@ final class Level
             default:
                 throw new \LogicException(sprintf('No levels found for category "%s"', $category->toString()));
         }
+    }
+
+    public static function guess(string $hayStack, Category $category): self
+    {
+        $hayStack = strtolower($hayStack);
+        if (strpos($hayStack, 'n1') !== false) {
+            return self::N1();
+        }
+
+        if (strpos($hayStack, 'n2') !== false) {
+            return self::N2();
+        }
+
+        if (strpos($hayStack, 'n3') !== false) {
+            return self::N3();
+        }
+
+        if (strpos($hayStack, 'n4') !== false) {
+            return self::N4();
+        }
+
+        if (strpos($hayStack, 'd1') !== false) {
+            return self::D1();
+        }
+
+        if (strpos($hayStack, 'd2') !== false) {
+            return self::D2();
+        }
+
+        if (strpos($hayStack, 'd3') !== false) {
+            return self::D3();
+        }
+
+        if (strpos($hayStack, 'd4') !== false) {
+            return self::D4();
+        }
+
+        if (strpos($hayStack, 'd4') !== false) {
+            return self::D4();
+        }
+
+        if (strpos($hayStack, 'div') !== false && strpos($hayStack, '1') !== false) {
+            return self::DIV1();
+        }
+
+        if (strpos($hayStack, 'div') !== false && strpos($hayStack, '2') !== false) {
+            return self::DIV2();
+        }
+
+        if (strpos($hayStack, 'div') !== false && strpos($hayStack, '3') !== false) {
+            return self::DIV3();
+        }
+
+        if (strpos($hayStack, 'div') !== false && strpos($hayStack, '4') !== false) {
+            return self::DIV4();
+        }
+
+        if (strpos($hayStack, 'div') !== false && strpos($hayStack, '5') !== false) {
+            return self::DIV5();
+        }
+
+        if (strpos($hayStack, 'div') !== false && strpos($hayStack, '6') !== false) {
+            return self::DIV6();
+        }
+
+        if (strpos($hayStack, 'h') !== false) {
+            if ($category->equals(Category::JEUGD2())) {
+                return self::DIV6();
+            }
+        }
+
+        if (strpos($hayStack, 'g') !== false) {
+            if ($category->equals(Category::JEUGD2())) {
+                return self::DIV5();
+            }
+
+            if ($category->equals(Category::JUNIOR())) {
+                return self::DIV6();
+            }
+        }
+
+        if (strpos($hayStack, 'f') !== false) {
+            if ($category->equals(Category::JEUGD2())) {
+                return self::DIV4();
+            }
+
+            if ($category->equals(Category::JUNIOR())) {
+                return self::DIV5();
+            }
+
+            if ($category->equals(Category::SENIOR())) {
+                return self::DIV6();
+            }
+        }
+
+        if (strpos($hayStack, 'e') !== false) {
+            if ($category->equals(Category::JEUGD2())) {
+                return self::DIV3();
+            }
+
+            if ($category->equals(Category::JUNIOR())) {
+                return self::DIV4();
+            }
+
+            if ($category->equals(Category::SENIOR())) {
+                return self::DIV5();
+            }
+        }
+
+        if (strpos($hayStack, 'd') !== false) {
+            if ($category->equals(Category::JEUGD2())) {
+                return self::DIV2();
+            }
+
+            if ($category->equals(Category::JUNIOR())) {
+                return self::DIV3();
+            }
+
+            if ($category->equals(Category::SENIOR())) {
+                return self::DIV4();
+            }
+        }
+
+        if (strpos($hayStack, 'c') !== false) {
+            if ($category->equals(Category::JEUGD2())) {
+                return self::DIV1();
+            }
+
+            if ($category->equals(Category::JUNIOR())) {
+                return self::DIV2();
+            }
+
+            if ($category->equals(Category::SENIOR())) {
+                return self::DIV3();
+            }
+        }
+
+        if (strpos($hayStack, 'b') !== false) {
+            if ($category->equals(Category::JEUGD2())) {
+                return self::ERE();
+            }
+
+            if ($category->equals(Category::JUNIOR())) {
+                return self::DIV1();
+            }
+
+            if ($category->equals(Category::SENIOR())) {
+                return self::DIV2();
+            }
+        }
+
+        if (strpos($hayStack, 'a') !== false) {
+            if ($category->equals(Category::JUNIOR())) {
+                return self::ERE();
+            }
+
+            if ($category->equals(Category::SENIOR())) {
+                return self::DIV1();
+            }
+        }
+
+        throw new \LogicException(sprintf('Could not guess the level from input "%s"', $hayStack));
     }
 
     public function equals(self $other): bool
