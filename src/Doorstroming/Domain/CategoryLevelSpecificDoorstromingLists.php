@@ -175,17 +175,17 @@ final class CategoryLevelSpecificDoorstromingLists
 
     private function subtractFromNumberOfNationalExtraSpotsAvailable(int $number): void
     {
-        if ($number > $this->numberOfDistrictExtraSpots) {
+        if ($number > $this->numberOfNationalExtraSpots) {
             throw new LogicException(
                 sprintf(
                     'Trying to subtract "%d" spots, but only "%d" extra spots are available"',
                     $number,
-                    $this->numberOfDistrictExtraSpots
+                    $this->numberOfNationalExtraSpots
                 )
             );
         }
 
-        $this->numberOfDistrictExtraSpots = $this->numberOfDistrictExtraSpots - $number;
+        $this->numberOfNationalExtraSpots = $this->numberOfNationalExtraSpots - $number;
     }
 
     public function categoryLevelCombination(): CategoryLevelCombination
