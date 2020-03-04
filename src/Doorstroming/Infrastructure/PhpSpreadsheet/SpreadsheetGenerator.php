@@ -81,6 +81,7 @@ final class SpreadsheetGenerator
                 }
 
                 $fullListsActiveSheet->setCellValue('A' . $currentFullListsRow, 'Doorstroming ' . $apparatusInDutch);
+                $fullListsActiveSheet->getStyle('A' . $currentFullListsRow)->getFont()->setBold( true );
                 $currentFullListsRow = $currentFullListsRow + 2;
                 $fullListsActiveSheet->setCellValue('A' . $currentFullListsRow, $list->identifier());
                 $fullListsActiveSheet->setCellValue('B' . $currentFullListsRow, 'Naam');
@@ -89,6 +90,7 @@ final class SpreadsheetGenerator
                 $fullListsActiveSheet->setCellValue('E' . $currentFullListsRow, 'Ranking Wedstrijd 2');
                 $fullListsActiveSheet->setCellValue('F' . $currentFullListsRow, 'Beste Ranking');
                 $fullListsActiveSheet->setCellValue('G' . $currentFullListsRow, 'Gemiddelde Ranking (ex aequo)');
+                $fullListsActiveSheet->getStyle('A' . $currentFullListsRow . ':G' . $currentFullListsRow)->getFont()->setBold( true );
 
                 foreach ($list->doorstromingEntries() as $doorstromingEntry) {
                     $currentFullListsRow++;
@@ -131,10 +133,12 @@ final class SpreadsheetGenerator
                         'A' . $currentDoorstromingListsRow,
                         'Overzicht doorgestroomde turnsters: ' . $apparatusInDutch
                     );
+                    $doorstromingListsActiveSheet->getStyle('A' . $currentDoorstromingListsRow)->getFont()->setBold( true );
                     $currentDoorstromingListsRow = $currentDoorstromingListsRow + 2;
                     $doorstromingListsActiveSheet->setCellValue('A' . $currentDoorstromingListsRow, 'Naam');
                     $doorstromingListsActiveSheet->setCellValue('B' . $currentDoorstromingListsRow, 'Vereniging');
                     $doorstromingListsActiveSheet->setCellValue('C' . $currentDoorstromingListsRow, 'Komt van groep');
+                    $doorstromingListsActiveSheet->getStyle('A' . $currentDoorstromingListsRow . ':C' . $currentDoorstromingListsRow)->getFont()->setBold( true );
                     $currentDoorstromingListsRow++;
                 }
 
@@ -154,10 +158,12 @@ final class SpreadsheetGenerator
                         'A' . $currentDoorstromingListsRow,
                         'Overzicht doorgestroomde turnsters: ' . $apparatusInDutch
                     );
+                    $doorstromingListsActiveSheet->getStyle('A' . $currentDoorstromingListsRow)->getFont()->setBold( true );
                     $currentDoorstromingListsRow = $currentDoorstromingListsRow + 2;
                     $doorstromingListsActiveSheet->setCellValue('A' . $currentDoorstromingListsRow, 'Naam');
                     $doorstromingListsActiveSheet->setCellValue('B' . $currentDoorstromingListsRow, 'Vereniging');
                     $doorstromingListsActiveSheet->setCellValue('C' . $currentDoorstromingListsRow, 'Komt van groep');
+                    $doorstromingListsActiveSheet->getStyle('A' . $currentDoorstromingListsRow . ':C' . $currentDoorstromingListsRow)->getFont()->setBold( true );
                     $currentDoorstromingListsRow++;
                 }
 
@@ -199,11 +205,13 @@ final class SpreadsheetGenerator
                             'A' . $currentReserveListsRow,
                             'Overzicht reserve turnsters: ' . $apparatusInDutch
                         );
+                        $reserveListsActiveSheet->getStyle('A' . $currentReserveListsRow)->getFont()->setBold( true );
                         $currentReserveListsRow = $currentReserveListsRow + 2;
                         $reserveListsActiveSheet->setCellValue('A' . $currentReserveListsRow, 'Reserve nummer');
                         $reserveListsActiveSheet->setCellValue('B' . $currentReserveListsRow, 'Naam');
                         $reserveListsActiveSheet->setCellValue('C' . $currentReserveListsRow, 'Vereniging');
                         $reserveListsActiveSheet->setCellValue('D' . $currentReserveListsRow, 'Komt van groep');
+                        $reserveListsActiveSheet->getStyle('A' . $currentReserveListsRow . ':D' . $currentReserveListsRow)->getFont()->setBold( true );
                         $currentReserveListsRow++;
                     }
 
@@ -224,11 +232,13 @@ final class SpreadsheetGenerator
                             'A' . $currentReserveListsRow,
                             'Overzicht reserve turnsters: ' . $apparatusInDutch
                         );
+                        $reserveListsActiveSheet->getStyle('A' . $currentReserveListsRow)->getFont()->setBold( true );
                         $currentReserveListsRow = $currentReserveListsRow + 2;
                         $reserveListsActiveSheet->setCellValue('A' . $currentReserveListsRow, 'Reserve nummer');
                         $reserveListsActiveSheet->setCellValue('B' . $currentReserveListsRow, 'Naam');
                         $reserveListsActiveSheet->setCellValue('C' . $currentReserveListsRow, 'Vereniging');
                         $reserveListsActiveSheet->setCellValue('D' . $currentReserveListsRow, 'Komt van groep');
+                        $reserveListsActiveSheet->getStyle('A' . $currentReserveListsRow . ':D' . $currentReserveListsRow)->getFont()->setBold( true );
                         $currentReserveListsRow++;
                     }
 
