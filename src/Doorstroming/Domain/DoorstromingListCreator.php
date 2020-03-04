@@ -65,8 +65,8 @@ final class DoorstromingListCreator
             $firstCompetitionScoreSheet->identifier(),
             $firstCompetitionScoreSheet->categoryLevelCombination(),
             $doorstromingEntries,
-            $firstCompetitionScoreSheet->totalNumberOfFullParticipatedGymnasts()
-            + $secondCompetitionScoreSheet->totalNumberOfFullParticipatedGymnasts(),
+            $firstCompetitionScoreSheet->totalNumberOfFullParticipatedGymnasts(),
+            $secondCompetitionScoreSheet->totalNumberOfFullParticipatedGymnasts(),
             $numberOfDistrictSpotsAvailable,
             $numberOfNationalSpotsAvailable,
             $numberOfReserveSpots

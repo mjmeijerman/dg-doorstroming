@@ -17,7 +17,9 @@ final class DoorstromingList
      */
     private array $doorstromingEntries;
 
-    private int $totalNumberOfFullParticipatingGymnasts;
+    private int $fistCompetitionNumberOfFullParticipatingGymnasts;
+
+    private int $secondCompetitionNumberOfFullParticipatingGymnasts;
 
     private int $numberOfDistrictSpotsAvailable;
 
@@ -33,7 +35,8 @@ final class DoorstromingList
         string $identifier,
         CategoryLevelCombination $categoryLevelCombination,
         array $doorstromingEntries,
-        int $totalNumberOfFullParticipatingGymnasts,
+        int $fistCompetitionNumberOfFullParticipatingGymnasts,
+        int $secondCompetitionNumberOfFullParticipatingGymnasts,
         int $numberOfDistrictSpotsAvailable,
         int $numberOfNationalSpotsAvailable,
         int $numberOfDistrictReserveSpots
@@ -41,14 +44,15 @@ final class DoorstromingList
     {
         Assertion::allIsInstanceOf($doorstromingEntries, DoorstromingEntry::class);
 
-        $self                                         = new self();
-        $self->identifier                             = $identifier;
-        $self->categoryLevelCombination               = $categoryLevelCombination;
-        $self->doorstromingEntries                    = $doorstromingEntries;
-        $self->totalNumberOfFullParticipatingGymnasts = $totalNumberOfFullParticipatingGymnasts;
-        $self->numberOfDistrictSpotsAvailable         = $numberOfDistrictSpotsAvailable;
-        $self->numberOfNationalSpotsAvailable         = $numberOfNationalSpotsAvailable;
-        $self->numberOfDistrictReserveSpots           = $numberOfDistrictReserveSpots;
+        $self                                                     = new self();
+        $self->identifier                                         = $identifier;
+        $self->categoryLevelCombination                           = $categoryLevelCombination;
+        $self->doorstromingEntries                                = $doorstromingEntries;
+        $self->fistCompetitionNumberOfFullParticipatingGymnasts   = $fistCompetitionNumberOfFullParticipatingGymnasts;
+        $self->secondCompetitionNumberOfFullParticipatingGymnasts = $secondCompetitionNumberOfFullParticipatingGymnasts;
+        $self->numberOfDistrictSpotsAvailable                     = $numberOfDistrictSpotsAvailable;
+        $self->numberOfNationalSpotsAvailable                     = $numberOfNationalSpotsAvailable;
+        $self->numberOfDistrictReserveSpots                       = $numberOfDistrictReserveSpots;
 
         $self->addRanking();
 
@@ -142,7 +146,17 @@ final class DoorstromingList
 
     public function totalNumberOfFullParticipatingGymnasts(): int
     {
-        return $this->totalNumberOfFullParticipatingGymnasts;
+        return $this->fistCompetitionNumberOfFullParticipatingGymnasts + $this->secondCompetitionNumberOfFullParticipatingGymnasts;
+    }
+
+    public function fistCompetitionNumberOfFullParticipatingGymnasts(): int
+    {
+        return $this->fistCompetitionNumberOfFullParticipatingGymnasts;
+    }
+
+    public function secondCompetitionNumberOfFullParticipatingGymnasts(): int
+    {
+        return $this->secondCompetitionNumberOfFullParticipatingGymnasts;
     }
 
     public function numberOfAvailableSpots(CompetitionType $competitionType): int
