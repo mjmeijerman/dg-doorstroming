@@ -124,10 +124,10 @@ final class CsvScoreSheetParser
                     $totalVaultEScoreForTotal = $totalVaultEScoreForVault;
 
                     if (
-                        ($firstVaultDScore === 0 && $secondVaultDScore === 0)
-                        || $barDScore === 0
-                        || $beamDScore === 0
-                        || $floorDScore === 0
+                        ($firstVaultDScore === (float) 0 && $secondVaultDScore === (float) 0)
+                        || $barDScore === (float) 0
+                        || $beamDScore === (float) 0
+                        || $floorDScore === (float) 0
                     ) {
                         $participatedEntireCompetition = false;
                     }
@@ -135,10 +135,10 @@ final class CsvScoreSheetParser
                     $totalVaultEScoreForTotal = $firstVaultEScore;
 
                     if (
-                        $firstVaultDScore === 0
-                        || $barDScore === 0
-                        || $beamDScore === 0
-                        || $floorDScore === 0
+                        $firstVaultDScore === (float) 0
+                        || $barDScore === (float) 0
+                        || $beamDScore === (float) 0
+                        || $floorDScore === (float) 0
                     ) {
                         $participatedEntireCompetition = false;
                     }
