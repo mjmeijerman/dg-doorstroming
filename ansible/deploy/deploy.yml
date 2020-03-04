@@ -6,3 +6,13 @@
 
   roles:
     - f500.project_deploy
+
+- name: Add cron job for removing generated files doorstroming project
+  cron:
+    user: "{{ ssh_provision_user }}"
+    name: "clean_up_generated_excel_files"
+    job: "find /home/deploy/people_import/* -mtime +28 -exec sudo rm {} \\;"
+    hour: "23"
+
+tasks:
+  - include_tasks: tasks/main.yml

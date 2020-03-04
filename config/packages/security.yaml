@@ -1,7 +1,14 @@
 security:
+    encoders:
+        Symfony\Component\Security\Core\User\User: 'auto'
+
     # https://symfony.com/doc/current/security.html#where-do-users-come-from-user-providers
     providers:
-        users_in_memory: { memory: null }
+        users_in_memory:
+            memory:
+                users:
+                    DG: { password: '$argon2id$v=19$m=65536,t=4,p=1$VhF8DjQKO4VkVSQgsbHpYw$hH4ffa3nXZb1YDv0GvMTUC4Pvc/kcUPM9dEqXfUX/HQ', roles: ['ROLE_USER'] }
+
     firewalls:
         dev:
             pattern: ^/(_(profiler|wdt)|css|images|js)/
@@ -9,6 +16,8 @@ security:
         main:
             anonymous: lazy
             provider: users_in_memory
+            http_basic:
+                realm: Secured Area
 
             # activate different ways to authenticate
             # https://symfony.com/doc/current/security.html#firewalls-authentication
@@ -19,5 +28,6 @@ security:
     # Easy way to control access for large sections of your site
     # Note: Only the *first* access control that matches will be used
     access_control:
+        - { path: '^/', roles: ROLE_USER }
         # - { path: ^/admin, roles: ROLE_ADMIN }
         # - { path: ^/profile, roles: ROLE_USER }

@@ -5,6 +5,7 @@
         "php": "^7.4.1",
         "ext-ctype": "*",
         "ext-iconv": "*",
+        "ext-json": "*",
         "beberlei/assert": "^3.2",
         "league/flysystem": "^1.0",
         "phpoffice/phpspreadsheet": "^1.10",
@@ -24,15 +25,14 @@
         "symfony/notifier": "5.0.*",
         "symfony/orm-pack": "*",
         "symfony/process": "5.0.*",
-        "symfony/security-bundle": "5.0.*",
+        "symfony/security-bundle": "^5.0",
         "symfony/serializer-pack": "*",
         "symfony/string": "5.0.*",
         "symfony/translation": "5.0.*",
         "symfony/twig-pack": "*",
         "symfony/validator": "5.0.*",
         "symfony/web-link": "5.0.*",
-        "symfony/yaml": "5.0.*",
-        "ext-json": "*"
+        "symfony/yaml": "5.0.*"
     },
     "require-dev": {
         "codeception/codeception": "^4.1",
