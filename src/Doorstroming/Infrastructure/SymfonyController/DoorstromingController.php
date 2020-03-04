@@ -439,6 +439,11 @@ final class DoorstromingController extends AbstractController
         return $this->parsedScoreSheets[$fileId->toString()][$apparatus];
     }
 
+    private function removeScoreSheets(UploadedFileId $fileId): void
+    {
+        unlink($this->getFileLocationFromId($fileId));
+    }
+
     private function getFileLocationFromId(UploadedFileId $fileId): string
     {
         return $this->uploadDir . $fileId->toString();

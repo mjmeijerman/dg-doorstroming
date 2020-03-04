@@ -1,16 +1,4 @@
 ---
 
-- name: Add cron job for removing generated files doorstroming project
-  cron:
-    name: "clean_up_generated_excel_files"
-    job: "find /home/deploy/doorstroming.jurysysteem.nl/current/var/uploadedScores/* -mtime +7 -exec rm {} \\;"
-    hour: "23"
-
-- name: Add cron job for removing generated files doorstroming project
-  cron:
-    name: "clean_up_generated_excel_files"
-    job: "find /home/deploy/doorstroming-test.jurysysteem.nl/current/var/uploadedScores/* -mtime +7 -exec rm {} \\;"
-    hour: "23"
-
 - name: Restart php-fpm
   shell: sudo /usr/sbin/service php7.4-fpm restart
