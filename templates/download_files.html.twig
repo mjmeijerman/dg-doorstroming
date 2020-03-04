@@ -13,7 +13,7 @@
         {% if files.extraSpotsAvailable is not empty %}
             <b>Let op, bij de volgende categorien moeten nog aanwijsplekken verdeeld worden:</b>
             {% for spots in files.extraSpotsAvailable %}
-                {{ spots.category }} {{ spots.level }}: {{ spots.extraSpots }} {% if spots.extraSpots == 1 %}plek{% else %}plekken{% endif %}
+                <br />{{ spots.category }} {{ spots.level }}: {{ spots.extraSpots }} {% if spots.extraSpots == 1 %}plek{% else %}plekken{% endif %}
                 <table border="1">
                     <tr>
                         <th>Groep</th>
