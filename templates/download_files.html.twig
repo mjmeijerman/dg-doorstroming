@@ -15,13 +15,20 @@
             {% for spots in files.extraSpotsAvailable %}
                 {{ spots.category }} {{ spots.level }}: {{ spots.extraSpots }} {% if spots.extraSpots == 1 %}plek{% else %}plekken{% endif %}
                 <table border="1">
-                    <tr><th>Groep</th><th>Volledig geturnd W1</th><th>Volledig geturnd W2</th><th>Volledig geturnd totaal</th></tr>
+                    <tr>
+                        <th>Groep</th>
+                        <th>Volledig geturnd W1</th>
+                        <th>Volledig geturnd W2</th>
+                        <th>Volledig geturnd totaal</th>
+                        <th>Aantal toegwezen plekken</th>
+                    </tr>
                     {% for group in spots.groups %}
                         <tr>
                             <td><b>{{ group.name }}</b></td>
                             <td align="center">{{ group.firstCompetitionFullParticipants }}</td>
                             <td align="center">{{ group.secondCompetitionFullParticipants }}</td>
                             <td align="center">{{ group.totalFullParticipants }}</td>
+                            <td align="center">{{ group. }}</td>
                         </tr>
                     {% endfor %}
                 </table>

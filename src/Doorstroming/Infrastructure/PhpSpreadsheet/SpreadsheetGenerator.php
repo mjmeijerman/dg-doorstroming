@@ -41,6 +41,7 @@ final class SpreadsheetGenerator
                         'secondCompetitionFullParticipants' => $list
                             ->secondCompetitionNumberOfFullParticipatingGymnasts(),
                         'totalFullParticipants'             => $list->totalNumberOfFullParticipatingGymnasts(),
+                        'fullNumberOfSpots'                 => $list->numberOfAvailableSpots($competitionType),
                     ];
                 }
                 $extraSpotsAvailable[] = [
