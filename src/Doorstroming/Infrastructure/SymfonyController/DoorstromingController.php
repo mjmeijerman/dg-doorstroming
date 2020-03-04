@@ -349,6 +349,9 @@ final class DoorstromingController extends AbstractController
             serialize($allDoorstromingFiles)
         );
 
+        $this->removeScoreSheets($firstFileId);
+        $this->removeScoreSheets($secondFileId);
+
         return new RedirectResponse(
             $this->generateUrl(
                 'downloadFiles',
