@@ -35,4 +35,16 @@
             {% endfor %}
         {% endif %}
     {% endfor %}
+    {% if combinedApparatusFile is not empty %}
+        <h1>Overzicht alle finalisten toestelfinales</h1>
+        <p>
+            <a href="{{ path('downloadSpecificFile', {'fileName': combinedApparatusFile}) }}">Download</a><br/>
+        </p>
+    {% endif %}
+    {% if combineReserveApparatusFile is not empty %}
+        <h1>Overzicht alle reserves toestelfinales</h1>
+        <p>
+            <a href="{{ path('downloadSpecificFile', {'fileName': combineReserveApparatusFile}) }}">Download</a><br/>
+        </p>
+    {% endif %}
 {% endblock %}

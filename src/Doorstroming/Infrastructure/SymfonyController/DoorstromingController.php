@@ -14,6 +14,8 @@ use Mark\Doorstroming\Domain\CompetitionType;
 use Mark\Doorstroming\Domain\ScoreSheets;
 use Mark\Doorstroming\Domain\UploadedFileHandler;
 use Mark\Doorstroming\Domain\UploadedFileId;
+use Mark\Doorstroming\Infrastructure\PhpSpreadsheet\SpreadsheetCombinedApparatusGenerator;
+use Mark\Doorstroming\Infrastructure\PhpSpreadsheet\SpreadsheetCombinedReserveGenerator;
 use Mark\Doorstroming\Infrastructure\PhpSpreadsheet\SpreadsheetGenerator;
 use PhpOffice\PhpSpreadsheet\IOFactory;
 use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
@@ -148,8 +150,25 @@ final class DoorstromingController extends AbstractController
         $allDoorstromingFiles = unserialize(
             file_get_contents($this->uploadDir . $firstCompetitionId . '-' . $secondCompetitionId)
         );
+        $combinedApparatusFile = null;
+        if (isset($allDoorstromingFiles['combinedApparatus'])) {
+            $combinedApparatusFile = $allDoorstromingFiles['combinedApparatus'];
+            unset($allDoorstromingFiles['combinedApparatus']);
+        }
+        $combineReserveApparatusFile = null;
+        if (isset($allDoorstromingFiles['combinedReserveApparatus'])) {
+            $combineReserveApparatusFile = $allDoorstromingFiles['combinedReserveApparatus'];
+            unset($allDoorstromingFiles['combinedReserveApparatus']);
+        }
 
-        return $this->render('download_files.html.twig', ['doorstromingFiles' => $allDoorstromingFiles]);
+        return $this->render(
+            'download_files.html.twig',
+            [
+                'doorstromingFiles'           => $allDoorstromingFiles,
+                'combinedApparatusFile'       => $combinedApparatusFile,
+                'combineReserveApparatusFile' => $combineReserveApparatusFile,
+            ]
+        );
     }
 
     private function generateExcelFiles(Request $request, string $firstCompetitionId, string $secondCompetitionId): Response
@@ -287,6 +306,22 @@ final class DoorstromingController extends AbstractController
             );
         }
 
+        $combinedApparatusReserveFile = SpreadsheetCombinedReserveGenerator::generate(
+            $vaultDoorstromingen,
+            $barDoorstromingen,
+            $beamDoorstromingen,
+            $floorDoorstromingen,
+            $this->uploadDir
+        );
+
+        $combinedApparatusFile = SpreadsheetCombinedApparatusGenerator::generate(
+            $vaultDoorstromingen,
+            $barDoorstromingen,
+            $beamDoorstromingen,
+            $floorDoorstromingen,
+            $this->uploadDir
+        );
+
         $nationalDoorstromingFiles = SpreadSheetGenerator::generate(
             $totalDoorstromingen,
             'Landelijke meerkamp',
@@ -342,6 +377,12 @@ final class DoorstromingController extends AbstractController
         }
         if (!empty($floorDoorstromingFiles)) {
             $allDoorstromingFiles['Vloer finale'] = $floorDoorstromingFiles;
+        }
+        if ($combinedApparatusFile) {
+            $allDoorstromingFiles['combinedApparatus'] = $combinedApparatusFile;
+        }
+        if ($combinedApparatusReserveFile) {
+            $allDoorstromingFiles['combinedReserveApparatus'] = $combinedApparatusReserveFile;
         }
 
         file_put_contents(
