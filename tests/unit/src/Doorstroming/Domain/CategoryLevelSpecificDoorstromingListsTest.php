@@ -20,7 +20,8 @@ class CategoryLevelSpecificDoorstromingListsTest extends TestCase
                 Level::N2()
             ),
             [],
-            15,
+            10,
+            5,
             3,
             0,
             0
@@ -33,7 +34,8 @@ class CategoryLevelSpecificDoorstromingListsTest extends TestCase
                 Level::N2()
             ),
             [],
-            18,
+            10,
+            8,
             3,
             0,
             0
@@ -46,7 +48,8 @@ class CategoryLevelSpecificDoorstromingListsTest extends TestCase
                 Level::N2()
             ),
             [],
-            13,
+            10,
+            3,
             3,
             0,
             0
@@ -59,7 +62,8 @@ class CategoryLevelSpecificDoorstromingListsTest extends TestCase
                 Level::N2()
             ),
             [],
-            15,
+            10,
+            5,
             3,
             0,
             0
@@ -72,7 +76,8 @@ class CategoryLevelSpecificDoorstromingListsTest extends TestCase
                 Level::N2()
             ),
             [],
-            12,
+            10,
+            2,
             3,
             0,
             0
@@ -85,7 +90,8 @@ class CategoryLevelSpecificDoorstromingListsTest extends TestCase
                 Level::N2()
             ),
             [],
-            20,
+            10,
+            10,
             3,
             0,
             0
@@ -132,7 +138,8 @@ class CategoryLevelSpecificDoorstromingListsTest extends TestCase
                 Level::N2()
             ),
             [],
-            15,
+            10,
+            5,
             3,
             0,
             0
@@ -145,7 +152,8 @@ class CategoryLevelSpecificDoorstromingListsTest extends TestCase
                 Level::N2()
             ),
             [],
-            18,
+            10,
+            8,
             3,
             0,
             0
@@ -158,7 +166,8 @@ class CategoryLevelSpecificDoorstromingListsTest extends TestCase
                 Level::N2()
             ),
             [],
-            13,
+            10,
+            3,
             3,
             0,
             0
@@ -171,7 +180,8 @@ class CategoryLevelSpecificDoorstromingListsTest extends TestCase
                 Level::N2()
             ),
             [],
-            15,
+            10,
+            5,
             3,
             0,
             0
@@ -184,7 +194,8 @@ class CategoryLevelSpecificDoorstromingListsTest extends TestCase
                 Level::N2()
             ),
             [],
-            12,
+            10,
+            2,
             3,
             0,
             0
@@ -197,7 +208,8 @@ class CategoryLevelSpecificDoorstromingListsTest extends TestCase
                 Level::N2()
             ),
             [],
-            20,
+            10,
+            10,
             3,
             0,
             0
@@ -243,7 +255,8 @@ class CategoryLevelSpecificDoorstromingListsTest extends TestCase
                 Level::N2()
             ),
             [],
-            15,
+            10,
+            5,
             3,
             0,
             0
@@ -292,7 +305,8 @@ class CategoryLevelSpecificDoorstromingListsTest extends TestCase
                 Level::N2()
             ),
             [],
-            15,
+            10,
+            5,
             3,
             0,
             0
@@ -305,7 +319,8 @@ class CategoryLevelSpecificDoorstromingListsTest extends TestCase
                 Level::N2()
             ),
             [],
-            18,
+            10,
+            8,
             3,
             0,
             0

@@ -130,7 +130,8 @@ class DoorstromingListTest extends TestCase
                 Level::N3()
             ),
             [$entry5, $entry1, $entry3, $entry9, $entry7, $entry10, $entry2, $entry8, $entry4, $entry6],
-            8,
+            4,
+            4,
             5,
             0,
             0
