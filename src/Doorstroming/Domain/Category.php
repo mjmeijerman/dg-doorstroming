@@ -174,7 +174,7 @@ final class Category
         return $other->toString() === $this->toString();
     }
 
-    public function guess(string $supposedToBeACategory): self
+    public static function guess(string $supposedToBeACategory): self
     {
         $hayStack = strtolower($supposedToBeACategory);
         if (strpos($hayStack, 'mini') !== false) {
