@@ -29,10 +29,10 @@ final class CsvScoreSheetParser
         /** @var ScoreSheet|null $floorScoreSheet */
         $floorScoreSheet = null;
         while (($data = fgetcsv($handle, 0, $seperator)) !== false) {
-            if (strpos(strtolower($data[1]), 'med_grp_titel') !== false) {
+            if (strpos(strtolower((string) $data[1]), 'med_grp_titel') !== false) {
                 continue;
             }
-            if (strpos(strtolower($data[9]), 'bm') !== false) {
+            if (strpos(strtolower((string) $data[9]), 'bm') !== false) {
                 continue;
             }
             $csvData[] = $data;
