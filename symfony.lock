@@ -5,6 +5,9 @@
     "behat/gherkin": {
         "version": "v4.6.1"
     },
+    "brick/math": {
+        "version": "0.8.14"
+    },
     "codeception/codeception": {
         "version": "2.3",
         "recipe": {
@@ -247,6 +250,9 @@
     },
     "ralouphie/getallheaders": {
         "version": "3.0.3"
+    },
+    "ramsey/collection": {
+        "version": "1.0.1"
     },
     "ramsey/uuid": {
         "version": "3.9.3"
