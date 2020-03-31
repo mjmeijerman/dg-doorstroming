@@ -5,19 +5,14 @@ SHELL=/bin/bash
 ## up: Runs vagrant up
 .PHONY: up
 up:
-	vagrant up
+	cd ../vps1-provisioning && vagrant up
 
-## destroy: Destroys the project
-.PHONY: destroy
-destroy:
-	vagrant destroy
+## up: Runs vagrant provision
+.PHONY: provision
+make provision:
+	cd ../vps1-provisioning && vagrant provision
 
-## deploy:	Deploy the code to remote environments
-.PHONY: deploy
-deploy:
-	./deploy
-
-## release:	Make a new release
+## release:	Checkout master, get most recent version, create new (minor) tag, push master and tags
 .PHONY: release
 release:
 	bin/check-uncommitted-changes.sh
@@ -27,13 +22,13 @@ release:
 	git push origin master && git push --tags
 	./deploy
 
-## branch:	Make a new branch
+## branch:	Checkout master, get most recent version, create new branch based on master
 .PHONY: branch
 branch:
 	git checkout master
 	git pull
 	@read -p "Enter Branch Name: " branchName; \
-    git checkout -b $$branchName
+	git checkout -b $$branchName
 
 ## help:		Print this message
 .PHONY: help
