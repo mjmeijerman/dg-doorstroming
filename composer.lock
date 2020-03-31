@@ -6513,16 +6513,16 @@
         },
         {
             "name": "symfony/web-link",
-            "version": "v5.0.6",
+            "version": "v5.0.7",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/web-link.git",
-                "reference": "0e6b48c0f0348319386e9728d22761f31afb30ce"
+                "reference": "b62309b9f69ae6a8eb3cbd39241a5688bc5f1228"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/web-link/zipball/0e6b48c0f0348319386e9728d22761f31afb30ce",
-                "reference": "0e6b48c0f0348319386e9728d22761f31afb30ce",
+                "url": "https://api.github.com/repos/symfony/web-link/zipball/b62309b9f69ae6a8eb3cbd39241a5688bc5f1228",
+                "reference": "b62309b9f69ae6a8eb3cbd39241a5688bc5f1228",
                 "shasum": ""
             },
             "require": {
@@ -6584,7 +6584,7 @@
                 "psr13",
                 "push"
             ],
-            "time": "2020-03-18T08:00:37+00:00"
+            "time": "2020-03-27T16:56:45+00:00"
         },
         {
             "name": "symfony/yaml",
