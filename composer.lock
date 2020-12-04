@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "ddbf911b80ceb2718422710198e6e54f",
+    "content-hash": "f7461bc8973230511da3c2e8bb641f68",
     "packages": [
         {
             "name": "beberlei/assert",
@@ -7962,7 +7962,7 @@
         },
         {
             "name": "symfony/web-link",
-            "version": "v5.1.8",
+            "version": "v5.2.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/web-link.git",
