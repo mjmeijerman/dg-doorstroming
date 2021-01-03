@@ -4548,16 +4548,16 @@
         },
         {
             "name": "symfony/framework-bundle",
-            "version": "v5.1.9",
+            "version": "v5.1.10",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/framework-bundle.git",
-                "reference": "d070863c197c6eb72ed3a54611b0a1bc5749ecc2"
+                "reference": "a2d9f92436e7293f1941363312b530920d540e90"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/framework-bundle/zipball/d070863c197c6eb72ed3a54611b0a1bc5749ecc2",
-                "reference": "d070863c197c6eb72ed3a54611b0a1bc5749ecc2",
+                "url": "https://api.github.com/repos/symfony/framework-bundle/zipball/a2d9f92436e7293f1941363312b530920d540e90",
+                "reference": "a2d9f92436e7293f1941363312b530920d540e90",
                 "shasum": ""
             },
             "require": {
@@ -4566,6 +4566,7 @@
                 "symfony/cache": "^4.4|^5.0",
                 "symfony/config": "^5.0",
                 "symfony/dependency-injection": "^5.1",
+                "symfony/deprecation-contracts": "^2.1",
                 "symfony/error-handler": "^4.4.1|^5.0.1",
                 "symfony/event-dispatcher": "^5.1",
                 "symfony/filesystem": "^4.4|^5.0",
@@ -4686,7 +4687,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2020-11-27T14:08:52+00:00"
+            "time": "2020-12-14T14:33:09+00:00"
         },
         {
             "name": "symfony/http-client",
@@ -6461,16 +6462,16 @@
         },
         {
             "name": "symfony/routing",
-            "version": "v5.2.0",
+            "version": "v5.2.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/routing.git",
-                "reference": "130ac5175ad2fd417978baebd8062e2e6b2bc28b"
+                "reference": "934ac2720dcc878a47a45c986b483a7ee7193620"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/routing/zipball/130ac5175ad2fd417978baebd8062e2e6b2bc28b",
-                "reference": "130ac5175ad2fd417978baebd8062e2e6b2bc28b",
+                "url": "https://api.github.com/repos/symfony/routing/zipball/934ac2720dcc878a47a45c986b483a7ee7193620",
+                "reference": "934ac2720dcc878a47a45c986b483a7ee7193620",
                 "shasum": ""
             },
             "require": {
@@ -6544,7 +6545,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2020-11-27T00:39:34+00:00"
+            "time": "2020-12-08T17:03:37+00:00"
         },
         {
             "name": "symfony/security-bundle",
