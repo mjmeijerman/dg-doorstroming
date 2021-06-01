@@ -22,7 +22,7 @@
         "symfony/intl": "5.2.*",
         "symfony/mailer": "5.2.*",
         "symfony/monolog-bundle": "^3.1",
-        "symfony/notifier": "5.2.*",
+        "symfony/notifier": "5.3.*",
         "symfony/orm-pack": "*",
         "symfony/process": "5.2.*",
         "symfony/security-bundle": "^5.0",
